@@ -1,0 +1,21 @@
+/* Default */
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: arial, helvetica;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================================================= */
