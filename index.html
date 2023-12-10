@@ -1,21 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
+    <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
     <title>IPMEDT3</title>
-</head>
-<body>
-    <p>hello world</p>
+  </head>
+  <body>
     <a-scene>
-        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-assets>
+        <a-asset-item id="shovel-obj" src="obj/shovel.obj"></a-asset-item>
+        <a-asset-item id="shovel-mtl" src="obj/shovel.mtl"></a-asset-item>
+      </a-assets>
 
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
-      </a-scene>
-    <script type="module" src="script.js"></script>
-</body>
+      <a-camera>
+        <!-- <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+        material="color: black; shader: flat">
+        </a-entity> -->
+      </a-camera>
+      
+      <a-entity
+        id="leftHand"
+        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
+        super-hands
+        sphere-collider="objects: a-box;"
+      ></a-entity>
+      <a-entity
+        id="rightHand"
+        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
+        super-hands
+        sphere-collider="objects: a-box;"
+      ></a-entity>
+
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
+      <a-sky src="img/sky.jfif"></a-sky>
+
+      <a-box 
+        grabbable
+        position="-0.5 1 -2"
+        color="yellow"
+      ></a-box>
+
+      <a-entity grabbable position="-1 0.25 -4" scale="1" obj-model="obj: #shovel-obj; mtl: #shovel-mtl"></a-entity>
+    </a-scene>
+  </body>
 </html>
