@@ -43,3 +43,22 @@ function createBoxes() {
     }
   }
 }
+
+
+
+
+// Audio afspelen test
+document.addEventListener("keydown", function (event) {
+  if (event.key === "z" || event.key === "Z") {
+    const mine = document.getElementById("mine");
+    mine.play();
+  }
+  if (event.key === "x" || event.key === "X") {
+    const brush = document.getElementById("brush");
+    brush.play();
+  }
+  if (event.key === "c" || event.key === "C") {
+    const dig = document.getElementById("dig");
+    dig.play();
+  }
+});
