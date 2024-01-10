@@ -1,45 +1,51 @@
-// window.onload = () =>{
-//     const places = document.getElementsByClassName('js--place');
-//     const camera = document.getElementById('js--camera');
-
-//     let pickups = document.getElementsByClassName('js--pickup');
-//     let hold = null;
-// }
-
-
-// window.onload = () =>{
-//     console.log("javascript file werkt");
-//     document.querySelector('a-box').addEventListener('click', function (evt) {
-//         console.log("Het werkt");
-//         var removeable = document.querySelector('a-box');
-//         removeable.parentNode.removeChild(removeable);
-//       });
-// // }
-
-// function remove(){
-    
-// }
-
-// x 	Negative X axis extends left. Positive X Axis extends right.
-// y 	Negative Y axis extends down. Positive Y Axis extends up.
-// z 	Negative Z axis extends in. Positive Z Axis extends out.
+let camera;
+let numberOfEarthQuakes = 5;
 
 window.onload = () => {
-  createBoxes();
-}
+  camera = document.getElementById('js--camera');
+  let sky = document.getElementById("background");
 
-function createBoxes() {
-  const scene = document.querySelector("a-scene");
+  setTimeout(() => {
+    earthQuake();
+  }, 1200)
 
-  for (let z = -5; z <= 5; z++) {
-    for (let y = 0; y >= -2; y--) {
-      for (let x = -5; x <= 5; x++) {
-        const cube = document.createElement("a-box");
-        cube.classList.add("js--cube", "js--clickable");
-        cube.setAttribute("position", `${x} ${y} ${z}`);
-        cube.setAttribute("rotation", "0 0 0");
-        scene.appendChild(cube);
-      }
+  setTimeout(() => {
+    sky.setAttribute("src", "#volcano-errupt");
+  }, 1000)
+};
+
+function earthQuake() {
+  let i = 0;
+  const quakeDuration = 400;
+  const displacement = 0.02;
+  const initialPosition = camera.getAttribute("position");
+  const directions = [
+    { x: -displacement, y: 0, z: 0 },
+    { x: displacement, y: 0, z: 0 },
+    { x: 0, y: displacement, z: 0 },
+    { x: 0, y: -displacement, z: 0 }
+  ];
+
+  const startTime = performance.now();
+
+  function animate() {
+    const currentTime = performance.now();
+    const elapsedTime = currentTime - startTime;
+    const progress = (elapsedTime % quakeDuration) / quakeDuration;
+
+    const currentDirection = directions[Math.floor(progress * directions.length)];
+    const newPosition = {
+      x: initialPosition.x + currentDirection.x,
+      y: initialPosition.y + currentDirection.y,
+      z: initialPosition.z + currentDirection.z
+    };
+
+    camera.setAttribute("position", `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
+
+    if (elapsedTime < numberOfEarthQuakes * quakeDuration) {
+      requestAnimationFrame(animate);
     }
   }
+
+  animate();
 }
