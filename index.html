@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proof of concept</title>
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-  <script src="script.js"></script>
-</head>
-<body>
-  <a-scene>
-    <a-camera id="js--camera" position="0 1.6 0" look-controls>
-      <a-asset
-        animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
-        animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 500; from: 1 1 1; to: 0.1 0.1 0.1"
-        animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
-      ></a-asset>
-    </a-camera>
-    <a-assets>
-      <img id="volcano-normal" src="img/sky.png" alt="volcano">
-      <img id="volcano-errupt" src="img/sky-errupt.png" alt="volcano-errupt">
-    </a-assets>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Low-Fi - Elise Antenbrink</title>
 
-    <a-entity id="js--camera"></a-entity>
-    <a-plane position="0 0 0" rotation="-90 0 0" width="50" height="50" color="#7BC8A4"></a-plane>
-    <a-box position="0 1 -6"></a-box>
-    <a-sky id="background" src="#volcano-normal"></a-sky>
-  </a-scene>
-</body>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>-->
+    <script src="main.js"></script>
+  </head>
+  <body style="margin: 0; offset: none;">
+    <a-scene id="scene-digsite">
+      <a-assets>
+        <img id="sky" src="assets/sky.png" alt="sky">
+        <img id="sky-errupt" src="assets/sky-errupt.png" alt="sky">
+        <a-asset-item id="fossil-1" src="assets/fossil1.glb"></a-asset-item>
+        <a-asset-item id="fossil-2" src="assets/fossil2.glb"></a-asset-item>
+        <a-asset-item id="pickaxe" src="assets/pickaxe.glb"></a-asset-item>
+      </a-assets>
+      <a-camera position="0 1.8 0" id="js--camera"></a-camera>
+      <a-sky id="background" src="#sky"></a-sky>
+      <a-plane position="0 0.4 0" rotation="-90 0 0" width="200" height="200" color="#99734c"></a-plane>
+
+      <a-cone position="-15 1 -15" radius-bottom="6" radius-top="0.5" height="7" color="#634664"></a-cone>
+      <a-cylinder position="-10 1 -17" height="1" radius=".4" segments-radial="18" color="#e1b68a"></a-cylinder>
+
+      <a-entity class="fossils" gltf-model="#fossil-1" rotation="90 0 0" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossils" gltf-model="#fossil-2" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity class="fossils" gltf-model="#fossil-1" rotation="90 0 0" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossils" gltf-model="#fossil-2" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity class="tools" gltf-model="#pickaxe" position="-10 1.3 -17" scale="0.2 0.2 0.2" rotation="0 90 0"></a-entity>
+    </a-scene>
+  </body>
 </html>
