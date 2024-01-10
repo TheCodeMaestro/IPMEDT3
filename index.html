@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- Oude versie van aframe gebruikt zodat ik geen error krijg met de physics -->
+    <script src="https://aframe.io/releases//1.4.2/aframe.min.js"></script>
     <!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
     <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-gamepad-controls/dist/aframe-gamepad-controls.min.js"></script>  -->
     <script type="text/javascript" src="main.js"></script>
-    <title>IPMEDT3</title>
   </head>
   <body>
     <a-scene>
@@ -18,35 +17,48 @@
         <a-asset-item id="shovel-mtl" src="obj/shovel.mtl"></a-asset-item>
       </a-assets>
 
-      <a-camera>
-        <!-- <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-        material="color: black; shader: flat">
-        </a-entity> -->
-      </a-camera>
-      
-      <a-entity
-        id="leftHand"
-        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
-        super-hands
-        sphere-collider="objects: a-box;"
-      ></a-entity>
-      <a-entity
-        id="rightHand"
-        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
-        super-hands
-        sphere-collider="objects: a-box;"
-      ></a-entity>
+      <a-entity id="cameraRig" thumbstick-logging>
+        <a-camera></a-camera>
+  
+            <!-- oculus hands -->
+        <a-entity
+          id="leftHand"
+          hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
+          super-hands
+          sphere-collider="objects: a-box;"
+          static-body="shape: sphere; sphereRadius: 0.02"
+        ></a-entity>
+        <a-entity
+            id="rightHand"
+            hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
+            super-hands
+            sphere-collider="objects: a-box;"
+            static-body="shape: sphere; sphereRadius: 0.02"
+        ></a-entity>
+        <!-- <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;"></a-entity>
+        <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity> -->
+      </a-entity>
 
-      <!-- <a-plane position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane> -->
+      <a-plane id="collisionPlane" static-body position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
       <a-sky src="img/sky.jfif"></a-sky>
 
       <a-box 
         grabbable
-        position="-0.5 1 -2"
+        position="-0.5 1 -1"
         color="yellow"
+        constraint="hand: #right-hand;"
       ></a-box>
 
-      <a-entity grabbable position="-1 0.25 -4" scale="1" obj-model="obj: #shovel-obj; mtl: #shovel-mtl"></a-entity>
+      <a-box id="dynamicEntity" material="color: red; opacity: 0.7; transparent: true" grabbable position="0 1 -0.5" static-body width="0.1" height="0.1" depth="0.8" scale="1">
+        <a-entity position="-0.7 -0.55 0.7" rotation="0 90 0" obj-model="obj: #shovel-obj; mtl: #shovel-mtl"></a-entity>
+      </a-box>
+      
+      <!-- dynamic-body="angularDamping: 0.9; linearDamping: 0.9" -->
+
+      <!-- <a-entity
+      id="collisionListenerEntity"
+      collision-listener
+      ></a-entity> -->
     </a-scene>
   </body>
 </html>
