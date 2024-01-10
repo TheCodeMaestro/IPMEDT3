@@ -13,7 +13,7 @@ window.onload = () => {
   randomizePositionFossils();
 
   setTimeout(() => {
-    earthQuake();
+    earthQuake(400, 0.02);
   }, 3200)
 
   setTimeout(() => {
@@ -55,10 +55,10 @@ function randomizePositionFossils() {
   }
 }
 
-function earthQuake() {
+function earthQuake(duration, displace) {
   let i = 0;
-  const quakeDuration = 400;
-  const displacement = 0.02;
+  const quakeDuration = duration;
+  const displacement = displace;
   const initialPosition = camera.getAttribute("position");
   const directions = [
     { x: -displacement, y: 0, z: 0 },
