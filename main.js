@@ -12,6 +12,8 @@ window.onload = () => {
 
   playSound();
   movePlayer();
+
+  collisionFossilsTools()
 };
 
 function movePlayer() {
@@ -20,9 +22,8 @@ function movePlayer() {
       this.el.addEventListener('thumbstickmoved', this.movePlayer.bind(this));
     },
     movePlayer: function (evt) {
-      // Adjust the player's position based on thumbstick movement
       const cameraRig = this.el;
-      const speed = 0.03; // Adjust the speed as needed
+      const speed = 0.03;
 
       const newPosition = {
         x: cameraRig.getAttribute('position').x + evt.detail.x * speed,
@@ -33,6 +34,18 @@ function movePlayer() {
       cameraRig.setAttribute('position', newPosition);
     }
   });
+}
+
+function collisionFossilsTools() {
+  const collisionList = document.getElementsByClassName("collide");
+
+  for (let i = 0; i < collisionList.length; i++) {
+    const collisionEl = collisionList[i];
+    collisionEl.addEventListener('collide', function (evt) {
+      let sky = document.getElementById("background");
+      sky.setAttribute("src", "#sky-errupt");
+    });
+  }
 }
 
 function collision() {
