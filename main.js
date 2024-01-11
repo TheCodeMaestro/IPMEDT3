@@ -3,7 +3,7 @@ let numberOfEarthQuakes = 5;
 
 window.onload = () => {
   camera = document.getElementById('js--camera');
-  cameraRig.setAttribute('position', { x: 0, y: 0, z: 1.8 });
+  cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0});
 
   createBoxes();
   randomizePositionFossils();
@@ -22,7 +22,7 @@ function movePlayer() {
     movePlayer: function (evt) {
       // Adjust the player's position based on thumbstick movement
       const cameraRig = this.el;
-      const speed = 0.01; // Adjust the speed as needed
+      const speed = 0.03; // Adjust the speed as needed
 
       const newPosition = {
         x: cameraRig.getAttribute('position').x + evt.detail.x * speed,
