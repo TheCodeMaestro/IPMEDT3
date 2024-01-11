@@ -13,14 +13,44 @@
   <body>
     <a-scene>
       <a-assets>
-        <a-asset-item id="shovel-obj" src="obj/shovel.obj"></a-asset-item>
-        <a-asset-item id="shovel-mtl" src="obj/shovel.mtl"></a-asset-item>
+        <a-asset-item id="shovel" src="obj/shovel.glb"></a-asset-item>
+        <img id="sky" src="img/sky.png" alt="sky">
+        <img id="sky-errupt" src="img/sky-errupt.png" alt="sky">
+        <a-asset-item id="fossil-1" src="obj/fossil1.glb"></a-asset-item>
+        <a-asset-item id="fossil-2" src="obj/fossil2.glb"></a-asset-item>
+        <a-asset-item id="pickaxe" src="obj/pickaxe.glb"></a-asset-item>
       </a-assets>
 
+      <a-sky id="background" src="#sky"></a-sky>
+      <a-plane position="0 0.4 0" rotation="-90 0 0" width="200" height="200" color="#99734c"></a-plane>
+
+      <a-cone position="-15 1 -15" radius-bottom="6" radius-top="0.5" height="7" color="#634664"></a-cone>
+      <a-cylinder position="-10 1 -17" height="1" radius=".4" segments-radial="18" color="#e1b68a"></a-cylinder>
+      <a-cylinder position="-9 1 -17" height="1" radius=".4" segments-radial="18" color="#e1b68a"></a-cylinder>
+
+      <a-entity class="fossils" gltf-model="#fossil-1" rotation="90 0 0" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossils" gltf-model="#fossil-2" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity class="fossils" gltf-model="#fossil-1" rotation="90 0 0" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossils" gltf-model="#fossil-2" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
+      
+      <a-entity class="tools" grabbable gltf-model="#pickaxe" position="-10 1.3 -17" scale="0.2 0.2 0.2" rotation="0 90 0"></a-entity>
+      <a-entity class="tools" grabbable gltf-model="#shovel" position="-9 1.5 -17" scale="1 1 1" rotation="0 90 270"></a-entity>
+
+      <!-- <a-box 
+        grabbable
+        position="-0.5 1 -1"
+        color="yellow"
+        constraint="hand: #right-hand;"
+      ></a-box> -->
+      
+      <!-- <a-entity
+      id="collisionListenerEntity"
+      collision-listener
+      ></a-entity> -->
       <a-entity id="cameraRig" thumbstick-logging>
-        <a-camera></a-camera>
-  
-            <!-- oculus hands -->
+        <a-camera position="0 1.8 0" id="js--camera"></a-camera>
+        
+        <!-- oculus hands -->
         <a-entity
           id="leftHand"
           hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
@@ -35,30 +65,7 @@
             sphere-collider="objects: a-box;"
             static-body="shape: sphere; sphereRadius: 0.02"
         ></a-entity>
-        <!-- <a-entity id="leftHand" hand-tracking-grab-controls="hand: left;"></a-entity>
-        <a-entity id="rightHand" hand-tracking-grab-controls="hand: right;"></a-entity> -->
       </a-entity>
-
-      <a-plane id="collisionPlane" static-body position="0 0 -4" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
-      <a-sky src="img/sky.jfif"></a-sky>
-
-      <a-box 
-        grabbable
-        position="-0.5 1 -1"
-        color="yellow"
-        constraint="hand: #right-hand;"
-      ></a-box>
-
-      <a-box id="dynamicEntity" material="color: red; opacity: 0.7; transparent: true" grabbable position="0 1 -0.5" static-body width="0.1" height="0.1" depth="0.8" scale="1">
-        <a-entity position="-0.7 -0.55 0.7" rotation="0 90 0" obj-model="obj: #shovel-obj; mtl: #shovel-mtl"></a-entity>
-      </a-box>
-      
-      <!-- dynamic-body="angularDamping: 0.9; linearDamping: 0.9" -->
-
-      <!-- <a-entity
-      id="collisionListenerEntity"
-      collision-listener
-      ></a-entity> -->
     </a-scene>
   </body>
 </html>
