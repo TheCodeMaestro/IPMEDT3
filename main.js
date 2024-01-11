@@ -3,20 +3,14 @@ let numberOfEarthQuakes = 5;
 
 window.onload = () => {
   camera = document.getElementById('js--camera');
-  let sky = document.getElementById("background");
   cameraRig.setAttribute('position', { x: 0, y: 0, z: 1.8 });
 
   createBoxes();
   randomizePositionFossils();
 
-  setTimeout(() => {
-    earthQuake();
-  }, 3200)
+  startEarthQuake(4000);
 
-  setTimeout(() => {
-    sky.setAttribute("src", "#sky-errupt");
-  }, 3000)
-
+  playSound();
   movePlayer();
 };
 
@@ -94,6 +88,18 @@ function randomizePositionFossils() {
   }
 }
 
+function startEarthQuake(timeout) {
+  let sky = document.getElementById("background");
+  
+  setTimeout(() => {
+    earthQuake();
+  }, (timeout + 200))
+
+  setTimeout(() => {
+    sky.setAttribute("src", "#sky-errupt");
+  }, timeout)
+}
+
 function earthQuake() {
   let i = 0;
   const quakeDuration = 400;
@@ -134,4 +140,21 @@ function getRandomInt(min, max) {
   min = Math.ceil(min); //inclusive
   max = Math.floor(max); //exclusive
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function playSound(){
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "z" || event.key === "Z") {
+      const mine = document.getElementById("sound-mine");
+      mine.play();
+    }
+    if (event.key === "x" || event.key === "X") {
+      const brush = document.getElementById("sound-brush");
+      brush.play();
+    }
+    if (event.key === "c" || event.key === "C") {
+      const dig = document.getElementById("sound-dig");
+      dig.play();
+    }
+  });
 }
