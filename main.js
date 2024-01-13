@@ -11,12 +11,10 @@ window.onload = () => {
   startEarthQuake(4000);
 
   playSound();
-  movePlayer();
 
   collisionFossilsTools()
-};
 
-function movePlayer() {
+
   AFRAME.registerComponent('thumbstick-logging', {
     init: function () {
       this.el.addEventListener('thumbstickmoved', this.movePlayer.bind(this));
@@ -34,6 +32,10 @@ function movePlayer() {
       cameraRig.setAttribute('position', newPosition);
     }
   });
+};
+
+function movePlayer() {
+
 }
 
 function collisionFossilsTools() {
@@ -48,6 +50,7 @@ function collisionFossilsTools() {
   }
 }
 
+// no idea if this works
 function collision() {
   console.log('1');
   AFRAME.registerComponent('collision-listener', {
