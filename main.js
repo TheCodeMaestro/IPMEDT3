@@ -3,7 +3,7 @@ let numberOfEarthQuakes = 5;
 
 window.onload = () => {
   createBoxes();
-  cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0});
+  cameraRig.setAttribute('position', { x: 0, y: 0.5, z: 0});
   
   AFRAME.registerComponent('thumbstick-logging', {
     init: function () {
@@ -135,12 +135,12 @@ function earthQuake() {
     const currentDirection = directions[Math.floor(progress * directions.length)];
     const newPosition = {
       x: initialPosition.x + currentDirection.x,
-      y: initialPosition.y + currentDirection.y,
+      y: initialPosition.y,
       z: initialPosition.z + currentDirection.z
     };
 
-    camera.setAttribute("position", `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
-    cameraRig.setAttribute('position', `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
+    camera.setAttribute("position", `${newPosition.x} ${0.5} ${newPosition.z}`);
+    cameraRig.setAttribute('position', `${newPosition.x} ${0.5} ${newPosition.z}`);
 
     if (elapsedTime < numberOfEarthQuakes * quakeDuration) {
       requestAnimationFrame(animate);
