@@ -2,7 +2,8 @@ let camera;
 let numberOfEarthQuakes = 5;
 
 window.onload = () => {
-  camera = document.getElementById('js--camera');
+  createBoxes();
+  cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0});
   
   AFRAME.registerComponent('thumbstick-logging', {
     init: function () {
@@ -11,7 +12,7 @@ window.onload = () => {
     movePlayer: function (evt) {
       
       const cameraRig = this.el;
-      const speed = 0.01;
+      const speed = 0.03;
       const newPosition = {
         x: cameraRig.getAttribute('position').x + evt.detail.x * speed,
         y: cameraRig.getAttribute('position').y,
@@ -21,13 +22,12 @@ window.onload = () => {
       cameraRig.setAttribute('position', newPosition);
     }
   });
-  cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0});
+  camera = document.getElementById('js--camera');
 
-  createBoxes();
   randomizePositionFossils();
   startEarthQuake(4000);
   playSound();
-  collisionFossilsTools()
+  collisionFossilsTools();
 };
 
 function collisionFossilsTools() {
@@ -37,7 +37,7 @@ function collisionFossilsTools() {
     const collisionEl = collisionList[i];
     collisionEl.addEventListener('collide', function (evt) {
       let sky = document.getElementById("background");
-      sky.setAttribute("src", "#sky-errupt");
+      sky.setAttribute("src", "#sky");
     });
   }
 }
@@ -71,7 +71,7 @@ function createBoxes() {
         const cube = document.createElement("a-box");
         cube.classList.add("js--cube", "js--clickable");
         cube.setAttribute("position", `${x} ${y} ${z}`);
-        cube.setAttribute("color", "#daa46d")
+        cube.setAttribute("color", "#daa46d");
         scene.appendChild(cube);
       }
     }
@@ -87,6 +87,11 @@ function randomizePositionFossils() {
 
     fossilsPosX = getRandomInt(-5, 6);
     fossilsPosY = getRandomInt(-5, 6);
+
+    if (fossilsPosX == 0 || fossilsPosY == 0) {
+      fossilsPosX = getRandomInt(-5, 6);
+      fossilsPosY = getRandomInt(-5, 6);
+    }
     
     if (fossilElID == "#fossil-1") {
       fossilEl.setAttribute("position", `${fossilsPosX} 0.6 ${fossilsPosY}`);
@@ -135,13 +140,12 @@ function earthQuake() {
     };
 
     camera.setAttribute("position", `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
-    // cameraRig.setAttribute('position', `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
+    cameraRig.setAttribute('position', `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
 
     if (elapsedTime < numberOfEarthQuakes * quakeDuration) {
       requestAnimationFrame(animate);
     }
   }
-
   animate();
 }
 
