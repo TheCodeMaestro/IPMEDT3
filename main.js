@@ -3,40 +3,32 @@ let numberOfEarthQuakes = 5;
 
 window.onload = () => {
   camera = document.getElementById('js--camera');
-  cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0});
-
-  createBoxes();
-  randomizePositionFossils();
-
-  startEarthQuake(4000);
-
-  playSound();
-
-  collisionFossilsTools()
-
-
+  
   AFRAME.registerComponent('thumbstick-logging', {
     init: function () {
       this.el.addEventListener('thumbstickmoved', this.movePlayer.bind(this));
     },
     movePlayer: function (evt) {
+      
       const cameraRig = this.el;
-      const speed = 0.03;
-
+      const speed = 0.01;
       const newPosition = {
         x: cameraRig.getAttribute('position').x + evt.detail.x * speed,
         y: cameraRig.getAttribute('position').y,
         z: cameraRig.getAttribute('position').z + evt.detail.y * speed
       };
-
+      
       cameraRig.setAttribute('position', newPosition);
     }
   });
+  cameraRig.setAttribute('position', { x: 0, y: 1.6, z: 0});
+
+  createBoxes();
+  randomizePositionFossils();
+  startEarthQuake(4000);
+  playSound();
+  collisionFossilsTools()
 };
-
-function movePlayer() {
-
-}
 
 function collisionFossilsTools() {
   const collisionList = document.getElementsByClassName("collide");
@@ -143,6 +135,7 @@ function earthQuake() {
     };
 
     camera.setAttribute("position", `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
+    // cameraRig.setAttribute('position', `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
 
     if (elapsedTime < numberOfEarthQuakes * quakeDuration) {
       requestAnimationFrame(animate);

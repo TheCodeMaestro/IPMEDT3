@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>IPMEDT3</title>
     <!-- Oude versie van aframe gebruikt zodat ik geen error krijg met de physics -->
     <script src="https://aframe.io/releases//1.4.2/aframe.min.js"></script>
     <!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
@@ -21,6 +22,24 @@
         <a-asset-item id="pickaxe" src="obj/pickaxe.glb"></a-asset-item>
         <a-asset-item id="shovel" src="obj/shovel.glb"></a-asset-item>
       </a-assets>
+
+      <a-entity id="cameraRig" thumbstick-logging>
+        <a-camera position="0 1.6 0" id="js--camera"></a-camera>
+        <a-entity
+          id="leftHand"
+          hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
+          super-hands
+          sphere-collider="objects: a.tools;"
+          static-body="shape: sphere; sphereRadius: 0.02">
+        </a-entity>
+        <a-entity
+          id="rightHand"
+          hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
+          super-hands
+          sphere-collider="objects: a.interactable;"
+          static-body="shape: sphere; sphereRadius: 0.02">
+        </a-entity>
+      </a-entity>
 
       <a-sky id="background" src="#sky"></a-sky>
       <a-plane position="0 0.4 0" rotation="-90 0 0" width="200" height="200" color="#99734c"></a-plane>
@@ -45,25 +64,9 @@
       id="collisionListenerEntity"
       collision-listener
       ></a-entity> -->
-      <a-entity id="cameraRig" thumbstick-logging>
-        <a-camera position="0 1.6 0" id="js--camera"></a-camera>
         
-        <!-- oculus hands -->
-        <a-entity
-          id="leftHand"
-          hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
-          super-hands
-          sphere-collider="objects: a.tools;"
-          static-body="shape: sphere; sphereRadius: 0.02"
-        ></a-entity>
-        <a-entity
-            id="rightHand"
-            hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
-            super-hands
-            sphere-collider="objects: a.interactable;"
-            static-body="shape: sphere; sphereRadius: 0.02"
-        ></a-entity>
-      </a-entity>
+      <!-- oculus hands -->
+      
     </a-scene>
   </body>
 </html>
