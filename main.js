@@ -25,7 +25,7 @@ window.onload = () => {
   camera = document.getElementById('js--camera');
 
   randomizePositionFossils();
-  startEarthQuake(4000);
+  // startEarthQuake(4000);
   playSound();
   collisionFossilsTools();
 };
@@ -36,6 +36,7 @@ function collisionFossilsTools() {
   for (let i = 0; i < collisionList.length; i++) {
     const collisionEl = collisionList[i];
     collisionEl.addEventListener('collide', function (evt) {
+      
       let sky = document.getElementById("background");
       sky.setAttribute("src", "#sky");
     });
@@ -97,6 +98,12 @@ function randomizePositionFossils() {
       fossilEl.setAttribute("position", `${fossilsPosX} 0.6 ${fossilsPosY}`);
     } if (fossilElID == "#fossil-2") {
       fossilEl.setAttribute("position", `${fossilsPosX} -0.4 ${fossilsPosY}`);
+    }
+    if (fossilElID == "#fossil-3") {
+      fossilEl.setAttribute("position", `${fossilsPosX} 0.4 ${fossilsPosY}`);
+    }
+    if (fossilElID == "#fossil-4") {
+      fossilEl.setAttribute("position", `${fossilsPosX} 0.9 ${fossilsPosY}`);
     }
   }
 }

@@ -19,6 +19,8 @@
         <img id="sky-errupt" src="img/sky-errupt.png" alt="sky">
         <a-asset-item id="fossil-1" src="obj/fossil1.glb"></a-asset-item>
         <a-asset-item id="fossil-2" src="obj/fossil2.glb"></a-asset-item>
+        <a-asset-item id="fossil-3" src="obj/fossil3.glb"></a-asset-item>
+        <a-asset-item id="fossil-4" src="obj/fossil4.glb"></a-asset-item>
         <a-asset-item id="pickaxe" src="obj/pickaxe.glb"></a-asset-item>
         <a-asset-item id="shovel" src="obj/schep.glb"></a-asset-item>
         <a-asset-item id="tent" src="obj/tent.glb"></a-asset-item>
@@ -45,19 +47,23 @@
       <a-sky id="background" src="#sky"></a-sky>
       <a-plane position="0 0.4 0" rotation="-90 0 0" width="200" height="200" color="#99734c"></a-plane>
 
-      <!-- <a-cone position="-15 1 -15" height="7" radius-bottom="6" radius-top="0.5" color="#634664"></a-cone> -->
+      <!-- text-panels -->
+      <a-text id="tekst" value="none" position="1 .7 1" rotation="0 0 0"></a-text>
+
+      <!-- barrels -->
       <a-cylinder position="-10 0.7 -17" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
       <a-cylinder position="-9 0.7 -17" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
 
+      <!-- fossils -->
       <a-entity class="collide fossils" static-body gltf-model="#fossil-1" rotation="90 0 0" scale="0.3 0.3 0.3"></a-entity>
       <a-entity class="collide fossils" static-body gltf-model="#fossil-2" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
-      <a-entity class="collide fossils" static-body gltf-model="#fossil-1" rotation="90 0 0" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="collide fossils" static-body gltf-model="#fossil-2" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity class="collide fossils" static-body gltf-model="#fossil-3" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity class="collide fossils" static-body gltf-model="#fossil-4" rotation="0 0 90" scale="0.2 0.2 0.2"></a-entity>
       
       <a-entity class="collide interactable tools" grabbable static-body gltf-model="#pickaxe" position="-10 1 -17" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
-      <a-entity class="collide interactable tools" grabbable gltf-model="#shovel" position="-9 1 -17" scale="0.04 0.04 0.04" rotation="0 90 270"></a-entity>
-
-      <a-entity position="-6 1 -6" rotation="0 0 0" scale="0.3 0.3 0.3" gltf-model="#tent"></a-entity>
+      <a-entity class="collide interactable tools" grabbable gltf-model="#shovel" position="-9 0.9 -17" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
+      
+      <a-entity gltf-model="#tent" position="-13 3 -17" scale="0.2 0.2 0.2" rotation="0 320 0"></a-entity>
 
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
       <audio id="sound-brush" src="sound/brush.mp3"></audio>
