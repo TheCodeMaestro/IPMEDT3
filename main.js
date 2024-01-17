@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   camera = document.getElementById("js--camera");
 
   movePlayer();
-  // createBoxes();
   randomizePositionFossils();
   setPosTools();
-  // startEarthQuake(4000);
   loopCollision();
   randomizePositionCactus();
   playSound();
+  const oldPickaxeLocation = oldPickaxe.getAttribute("position");
+  const oldPshovelLocation = oldPshovel.getAttribute("position");
 });
 
 function setPosTools() {
@@ -32,57 +32,25 @@ function loopCollision() {
     for (let j = 0; j < tools.length; j++) {
       if (collision(tools[j], fossils[i])) {
         document.getElementById("tekst").setAttribute("value", "MAGIE");
-        break; // exit the inner loop once a collision is found
+        break;
       } else {
-        document.getElementById("tekst").setAttribute("value", "none"); // reset value if no collision
+        document.getElementById("tekst").setAttribute("value", "none");
       }
     }
   }
   setTimeout(loopCollision, 10);
 }
 
-function createBoxes() {
-  const scene = document.querySelector("a-scene");
-
-  for (let z = -5; z <= 5; z++) {
-    // left right
-    for (let y = 0; y >= -2; y--) {
-      // layers deep
-      for (let x = -5; x <= 5; x++) {
-        // front behind
-        const cube = document.createElement("a-box");
-        cube.classList.add("js--cube", "js--clickable");
-        cube.setAttribute("position", `${x} ${y} ${z}`);
-        cube.setAttribute("color", "#daa46d");
-        cube.setAttribute("id", `${y}`);
-        scene.appendChild(cube);
-      }
-    }
-  }
-}
-
 function randomizePositionCactus() {
-  const scene = document.querySelector("a-scene");
-  const cactus = document.getElementsByClassName("cactus");
-  const cactusEl = cactus[0];
+  const cacti = document.getElementsByClassName("cactus");
 
-
-
-
-  for (let i = 0; i < 1; i++) {
-    cactusEl === cactus[i];
-    for (let j = 0; j < 5; j++) {
-      cactusPosX = getRandomInt(-20, 20);
-      cactusPosY = getRandomInt(-20, 20);
-  
-      cactusEl.object3D.position.set(cactusPosX, 2, cactusPosY);
-  
-      if ((cactusPosY > -5 && cactusPosY < 6) ||(cactusPosX > -5 && cactusPosX < 6)) {
-        cactusPosX = getRandomInt(-20, 20);
-        cactusPosY = getRandomInt(-20, 20);
-      }
-      scene.appendChild(cactusEl);
-    }
+  for (let i = 0; i < cacti.length; i++) {
+    cacti[i].setAttribute("rotation", "0 0 0");
+    cacti[i].setAttribute("scale", "0.2 0.2 0.2");
+    
+    cactiPosX = getRandomIntExcluding(-20, 20, -9, 9);
+    cactiPosY = getRandomIntExcluding(-20, 20, -9, 9);
+    cacti[i].object3D.position.set(cactiPosX, "1", cactiPosY);
   }
 }
 
@@ -90,66 +58,11 @@ function randomizePositionFossils() {
   const fossils = document.getElementsByClassName("fossils");
 
   for (let i = 0; i < fossils.length; i++) {
-    let fossilElID = fossils[i].getAttribute("gltf-model");
+    fossilsPosX = getRandomInt(-9, 10);
+    fossilsPosY = getRandomInt(-9, 10);
 
-    fossilsPosX = getRandomInt(-5, 6);
-    fossilsPosY = getRandomInt(-5, 6);
-
-    fossils[i].object3D.position.set(fossilsPosX, "0.9", fossilsPosY);
+    fossils[i].object3D.position.set(fossilsPosX, "0", fossilsPosY);
   }
-}
-
-function startEarthQuake(timeout) {
-  let sky = document.getElementById("background");
-
-  setTimeout(() => {
-    earthQuake();
-  }, timeout + 200);
-
-  setTimeout(() => {
-    sky.setAttribute("src", "#sky-errupt");
-  }, timeout);
-}
-
-function earthQuake() {
-  let i = 0;
-  const quakeDuration = 400;
-  const displacement = 0.02;
-  const initialPosition = camera.getAttribute("position");
-  const directions = [
-    { x: -displacement, y: 0, z: 0 },
-    { x: displacement, y: 0, z: 0 },
-    { x: 0, y: displacement, z: 0 },
-    { x: 0, y: -displacement, z: 0 },
-  ];
-
-  const startTime = performance.now();
-
-  function animate() {
-    const currentTime = performance.now();
-    const elapsedTime = currentTime - startTime;
-    const progress = (elapsedTime % quakeDuration) / quakeDuration;
-
-    const currentDirection =
-      directions[Math.floor(progress * directions.length)];
-    const newPosition = {
-      x: initialPosition.x + currentDirection.x,
-      y: initialPosition.y + currentDirection.y,
-      z: initialPosition.z + currentDirection.z,
-    };
-
-    camera.object3D.position.set(newPosition.x, newPosition.y, newPosition.z);
-    cameraRig.object3D.position.set(
-      newPosition.x,
-      newPosition.y,
-      newPosition.z
-    );
-
-    if (elapsedTime < numberOfEarthQuakes * quakeDuration) {
-      requestAnimationFrame(animate);
-    }
-  }
-  animate();
 }
 
 function getRandomInt(min, max) {
@@ -160,6 +73,15 @@ function getRandomInt(min, max) {
   do {
     randomValue = Math.floor(Math.random() * (max - min) + min);
   } while (randomValue === 0);
+
+  return randomValue;
+}
+
+function getRandomIntExcluding(min, max, excludeMin, excludeMax) {
+  let randomValue;
+  do {
+    randomValue = Math.floor(Math.random() * (max - min + 1) + min);
+  } while (randomValue >= excludeMin && randomValue <= excludeMax);
 
   return randomValue;
 }
@@ -210,12 +132,21 @@ function movePlayer() {
         z: cameraRig.getAttribute("position").z + evt.detail.y * speed,
       };
 
-      cameraRig.object3D.position.set(
-        newPosition.x,
-        newPosition.y,
-        newPosition.z
-      );
+      cameraRig.object3D.position.set(newPosition.x, newPosition.y, newPosition.z);
+      
+      const pickaxe = document.getElementById("pickaxe")
+      const shovel = document.getElementById("shovel")
+      
+      const newPickaxeLocation = document.getElementById("pickaxe").getAttribute("position");
+      const newPshovelLocation = document.getElementsById("shovel").getAttribute("position");
+
+      if (oldPickaxeLocation != newPickaxeLocation) {
+        pickaxe.setAttribute("rotation", "90 90 90");
+      };
+      if (oldShovelLocation != newShovelLocation) {
+        shovel.setAttribute("rotation", "90 90 90");
+      };
+
     },
   });
 }
- 
