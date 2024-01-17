@@ -2,7 +2,7 @@ let camera;
 let numberOfEarthQuakes = 5;
 
 document.addEventListener("DOMContentLoaded", () => {
-  cameraRig.setAttribute("position", { x: 0, y: 0.5, z: 0 });
+  cameraRig.setAttribute("position", { x: 0, y: 0.1, z: 0 });
   camera = document.getElementById("js--camera");
 
   movePlayer();
@@ -125,7 +125,7 @@ function movePlayer() {
     },
     movePlayer: function (evt) {
       const cameraRig = this.el;
-      const speed = 0.03;
+      const speed = 0.04;
       const newPosition = {
         x: cameraRig.getAttribute("position").x + evt.detail.x * speed,
         y: cameraRig.getAttribute("position").y,
