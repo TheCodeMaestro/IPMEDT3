@@ -1,78 +1,86 @@
 let camera;
 let numberOfEarthQuakes = 5;
 
-window.onload = () => {
-  createBoxes();
-  cameraRig.setAttribute('position', { x: 0, y: 0.5, z: 0});
-  
-  AFRAME.registerComponent('thumbstick-logging', {
-    init: function () {
-      this.el.addEventListener('thumbstickmoved', this.movePlayer.bind(this));
-    },
-    movePlayer: function (evt) {
-      
-      const cameraRig = this.el;
-      const speed = 0.03;
-      const newPosition = {
-        x: cameraRig.getAttribute('position').x + evt.detail.x * speed,
-        y: cameraRig.getAttribute('position').y,
-        z: cameraRig.getAttribute('position').z + evt.detail.y * speed
-      };
-      
-      cameraRig.setAttribute('position', newPosition);
-    }
-  });
-  camera = document.getElementById('js--camera');
+document.addEventListener("DOMContentLoaded", (event) => {
+  cameraRig.setAttribute("position", { x: 0, y: 0.5, z: 0 });
+  camera = document.getElementById("js--camera");
 
+  movePlayer();
+  createBoxes();
   randomizePositionFossils();
   // startEarthQuake(4000);
   playSound();
-  collisionFossilsTools();
-};
+  loop();
+});
 
-function collisionFossilsTools() {
-  const collisionList = document.getElementsByClassName("collide");
+function loop() {
+  const fossils = document.getElementsByClassName("fossils");
+  const tools = document.getElementsByClassName("tools");
 
-  for (let i = 0; i < collisionList.length; i++) {
-    const collisionEl = collisionList[i];
-    collisionEl.addEventListener('collide', function (evt) {
-      
-      let sky = document.getElementById("background");
-      sky.setAttribute("src", "#sky");
-    });
-  }
-}
+  for (let i = 0; i < fossils.length; i++) {
+    for (let i = 0; i < tools.length; i++) {
+      // console.log(tools[i].object3D.position);
 
-// no idea if this works
-function collision() {
-  console.log('1');
-  AFRAME.registerComponent('collision-listener', {
-    init: function () {
-      this.el.addEventListener('collide', this.onCollide.bind(this));
-      console.log('2');
-    },
-    onCollide: function (event) {
-      console.log('3');
-      // Check if the collision is with the collisionPlane
-      if (event.detail.body.el.id === 'collisionPlane') {
-        console.log('4');
-        // Change the body type of the dynamicEntity to static-body
-        document.getElementById('dynamicEntity').setAttribute('static-body', '');
+      if (collision(tools[i], fossils[i])) {
+        document.getElementById("tekst").setAttribute("value", "MAGIE");
       }
     }
+  }
+  setTimeout(loop, 10);
+}
+
+function movePlayer() {
+  AFRAME.registerComponent("thumbstick-logging", {
+    init: function () {
+      this.el.addEventListener("thumbstickmoved", this.movePlayer.bind(this));
+    },
+    movePlayer: function (evt) {
+      const cameraRig = this.el;
+      const speed = 0.03;
+      const newPosition = {
+        x: cameraRig.getAttribute("position").x + evt.detail.x * speed,
+        y: cameraRig.getAttribute("position").y,
+        z: cameraRig.getAttribute("position").z + evt.detail.y * speed,
+      };
+
+      cameraRig.object3D.position.set(
+        newPosition.x,
+        newPosition.y,
+        newPosition.z
+      );
+    },
   });
+}
+
+function collision(obj1, obj2) {
+  let xobj1 = obj1.object3D.position.x;
+  let yobj1 = obj1.object3D.position.y;
+  let zobj1 = obj1.object3D.position.z;
+  let xobj2 = obj2.object3D.position.x;
+  let yobj2 = obj2.object3D.position.y;
+  let zobj2 = obj2.object3D.position.z;
+
+  let distance = Math.sqrt(
+    (xobj2 - xobj1) ** 2 + (yobj2 - yobj1) ** 2 + (zobj2 - zobj1) ** 2
+  );
+
+  return distance < 0.5; // 1m
 }
 
 function createBoxes() {
   const scene = document.querySelector("a-scene");
 
-  for (let z = -5; z <= 5; z++) { // left right
-    for (let y = 0; y >= -2; y--) { // layers deep
-      for (let x = -5; x <= 5; x++) { // front behind
+  for (let z = -5; z <= 5; z++) {
+    // left right
+    for (let y = 0; y >= -2; y--) {
+      // layers deep
+      for (let x = -5; x <= 5; x++) {
+        // front behind
         const cube = document.createElement("a-box");
         cube.classList.add("js--cube", "js--clickable");
         cube.setAttribute("position", `${x} ${y} ${z}`);
         cube.setAttribute("color", "#daa46d");
+        cube.setAttribute("id", `${y}`);
         scene.appendChild(cube);
       }
     }
@@ -81,6 +89,7 @@ function createBoxes() {
 
 function randomizePositionFossils() {
   const fossils = document.getElementsByClassName("fossils");
+  const tools = document.getElementsByClassName("tools");
 
   for (let i = 0; i < fossils.length; i++) {
     const fossilEl = fossils[i];
@@ -93,31 +102,41 @@ function randomizePositionFossils() {
       fossilsPosX = getRandomInt(-5, 6);
       fossilsPosY = getRandomInt(-5, 6);
     }
-    
-    if (fossilElID == "#fossil-1") {
-      fossilEl.setAttribute("position", `${fossilsPosX} 0.6 ${fossilsPosY}`);
-    } if (fossilElID == "#fossil-2") {
-      fossilEl.setAttribute("position", `${fossilsPosX} -0.4 ${fossilsPosY}`);
+
+    // fossilPositions = array[0.6, -0.4, 0.4, 0.9];
+    // fossilModels = array["#fossil-1", "#fossil-2", "#fossil-3", "#fossil-4"]
+
+    // for (let i = 0; i < fossils.length; i++) {
+    //   const element = array[i];
+
+    //   if (fossilElID == "fossil-" + (i + 1)) {
+    //   }
+
+    if (fossilElID == "fossil-1") {
+      fossilEl.object3D.position.set(fossilsPosX, 0.6, fossilsPosY);
     }
-    if (fossilElID == "#fossil-3") {
-      fossilEl.setAttribute("position", `${fossilsPosX} 0.4 ${fossilsPosY}`);
+    if (fossilElID == "fossil-2") {
+      fossilEl.object3D.position.set(fossilsPosX, -0.4, fossilsPosY);
     }
-    if (fossilElID == "#fossil-4") {
-      fossilEl.setAttribute("position", `${fossilsPosX} 0.9 ${fossilsPosY}`);
+    if (fossilElID == "fossil-3") {
+      fossilEl.object3D.position.set(fossilsPosX, 0.4, fossilsPosY);
+    }
+    if (fossilElID == "fossil-4") {
+      fossilEl.object3D.position.set(fossilsPosX, 0.9, fossilsPosY);
     }
   }
 }
 
 function startEarthQuake(timeout) {
   let sky = document.getElementById("background");
-  
+
   setTimeout(() => {
     earthQuake();
-  }, (timeout + 200))
+  }, timeout + 200);
 
   setTimeout(() => {
     sky.setAttribute("src", "#sky-errupt");
-  }, timeout)
+  }, timeout);
 }
 
 function earthQuake() {
@@ -129,7 +148,7 @@ function earthQuake() {
     { x: -displacement, y: 0, z: 0 },
     { x: displacement, y: 0, z: 0 },
     { x: 0, y: displacement, z: 0 },
-    { x: 0, y: -displacement, z: 0 }
+    { x: 0, y: -displacement, z: 0 },
   ];
 
   const startTime = performance.now();
@@ -139,15 +158,20 @@ function earthQuake() {
     const elapsedTime = currentTime - startTime;
     const progress = (elapsedTime % quakeDuration) / quakeDuration;
 
-    const currentDirection = directions[Math.floor(progress * directions.length)];
+    const currentDirection =
+      directions[Math.floor(progress * directions.length)];
     const newPosition = {
       x: initialPosition.x + currentDirection.x,
       y: initialPosition.y + currentDirection.y,
-      z: initialPosition.z + currentDirection.z
+      z: initialPosition.z + currentDirection.z,
     };
 
-    camera.setAttribute("position", `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
-    cameraRig.setAttribute('position', `${newPosition.x} ${newPosition.y} ${newPosition.z}`);
+    camera.object3D.position.set(newPosition.x, newPosition.y, newPosition.z);
+    cameraRig.object3D.position.set(
+      newPosition.x,
+      newPosition.y,
+      newPosition.z
+    );
 
     if (elapsedTime < numberOfEarthQuakes * quakeDuration) {
       requestAnimationFrame(animate);
@@ -162,7 +186,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function playSound(){
+function playSound() {
   document.addEventListener("keydown", function (event) {
     if (event.key === "z" || event.key === "Z") {
       const mine = document.getElementById("sound-mine");
