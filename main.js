@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tools[0].object3D.position.set("-10", "1", "-17");
     tools[1].object3D.position.set("-9", "0.9", "-17");
 
-    tools[i].setAttribute("position", tools[i].object3D.position);
-
     console.log(tools[0].object3D.position);
     console.log(tools[1].object3D.position);
   }
@@ -28,8 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function loop() {
   const fossils = document.getElementsByClassName("fossils");
   const tools = document.getElementsByClassName("tools");
-  const dig = document.getElementById("sound-dig");
-      dig.play();
 
   for (let i = 0; i < fossils.length; i++) {
     for (let j = 0; j < tools.length; j++) {
@@ -56,8 +52,6 @@ function movePlayer() {
         x: cameraRig.getAttribute("position").x + evt.detail.x * speed,
         y: cameraRig.getAttribute("position").y,
         z: cameraRig.getAttribute("position").z + evt.detail.y * speed,
-        
-  
       };
 
       cameraRig.object3D.position.set(
@@ -81,7 +75,7 @@ function collision(obj1, obj2) {
     (xobj2 - xobj1) ** 2 + (yobj2 - yobj1) ** 2 + (zobj2 - zobj1) ** 2
   );
 
-  return distance < 0.5; // 1m
+  return distance < 1; // 1m
 }
 
 function createBoxes() {
