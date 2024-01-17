@@ -2,21 +2,16 @@
 <html>
   <head>
     <title>IPMEDT3</title>
-    <!-- Oude versie van aframe gebruikt zodat ik geen error krijg met de physics -->
     <script src="https://aframe.io/releases//1.4.2/aframe.min.js"></script>
-    <!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.misc.min.js"></script>
     <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-gamepad-controls/dist/aframe-gamepad-controls.min.js"></script>  -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
     <link rel="icon" href="data:," />
     <script type="text/javascript" src="main.js"></script>
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <img id="sky" src="img/sky.png" alt="sky">
-        <img id="sky-errupt" src="img/sky-errupt.png" alt="sky">
         <a-asset-item id="fossil-1" src="obj/fossil1.glb"></a-asset-item>
         <a-asset-item id="fossil-2" src="obj/fossil2.glb"></a-asset-item>
         <a-asset-item id="fossil-3" src="obj/fossil3.glb"></a-asset-item>
@@ -41,14 +36,13 @@
           id="rightHand"
           hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
           super-hands
-          sphere-collider="objects: .interactable;"
+          sphere-collider="objects: .tools;"
           static-body="shape: sphere; sphereRadius: 0.02">
         </a-entity>
       </a-entity>
+      <a-entity environment="preset: yavapai"></a-entity>
 
-      <a-sky id="background" src="#sky"></a-sky>
-      <a-plane position="0 0.4 0" rotation="-90 0 0" width="200" height="200" color="#99734c"></a-plane>
-
+      <!-- <a-plane position="0 0.4 0" rotation="-90 0 0" width="200" height="200" color="#99734c"></a-plane> -->
       <!-- text-panels -->
       <a-text id="tekst" value="none" position="0 1 -5" rotation="0 0 0"></a-text>
 
@@ -65,14 +59,12 @@
       <!-- tools -->
       <a-entity id="pickaxe" class="tools" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
       <a-entity id="shovel" class="tools" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
-      
-      <a-entity gltf-model="#tent" position="-13 3 -17" scale="0.2 0.2 0.2" rotation="0 320 0"></a-entity>
+
+      <a-entity gltf-model="#tent" position="-13 3 -12" scale="0.15 0.15 0.15" rotation="0 320 0"></a-entity>
 
       <!-- cactus -->
       <a-entity class="cactus" static-body gltf-model="#cactus1" rotation="0 0 0" scale="0.2 0.2 0.2"></a-entity>
       <a-entity class="cactus" static-body gltf-model="#cactus2" rotation="0 0 0" scale="0.2 0.2 0.2"></a-entity>
-
-
 
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
       <audio id="sound-brush" src="sound/brush.mp3"></audio>

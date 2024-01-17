@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   camera = document.getElementById("js--camera");
 
   movePlayer();
-  createBoxes();
+  // createBoxes();
   randomizePositionFossils();
   setPosTools();
   // startEarthQuake(4000);
@@ -66,6 +66,9 @@ function randomizePositionCactus() {
   const cactus = document.getElementsByClassName("cactus");
   const cactusEl = cactus[0];
 
+
+
+
   for (let i = 0; i < 1; i++) {
     cactusEl === cactus[i];
     for (let j = 0; j < 5; j++) {
@@ -93,9 +96,6 @@ function randomizePositionFossils() {
     fossilsPosY = getRandomInt(-5, 6);
 
     fossils[i].object3D.position.set(fossilsPosX, "0.9", fossilsPosY);
-    // fossils[1].object3D.position.set(fossilsPosX, "-0.4", fossilsPosY);
-    // fossils[2].object3D.position.set(fossilsPosX, "0.4", fossilsPosY);
-    // fossils[3].object3D.position.set(fossilsPosX, "0.9", fossilsPosY);
   }
 }
 
