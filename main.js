@@ -5,6 +5,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
   cameraRig.setAttribute("position", { x: 0, y: 0.5, z: 0 });
   camera = document.getElementById("js--camera");
 
+  const tools = document.getElementsByClassName("tools");
+
+  for (let i = 0; i < tools.length; i++) {
+    tools[0].object3D.position.set("-10", "1", "-17");
+    tools[1].object3D.position.set("-9", "0.9", "-17");
+
+    console.log(tools[0].object3D.position);
+    console.log(tools[1].object3D.position);
+  }
+
   movePlayer();
   createBoxes();
   randomizePositionFossils();
@@ -19,9 +29,10 @@ function loop() {
 
   for (let i = 0; i < fossils.length; i++) {
     for (let i = 0; i < tools.length; i++) {
-      // console.log(tools[i].object3D.position);
 
       if (collision(tools[i], fossils[i])) {
+        // console.log(tools[i].object3D.position);
+        // console.log(fossils[i].object3D.position);
         document.getElementById("tekst").setAttribute("value", "MAGIE");
       }
     }
