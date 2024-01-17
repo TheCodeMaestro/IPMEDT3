@@ -8,22 +8,23 @@ document.addEventListener("DOMContentLoaded", () => {
   movePlayer();
   createBoxes();
   randomizePositionFossils();
+  setPosTools();
   // startEarthQuake(4000);
+  loopCollision();
+  randomizePositionCactus();
   playSound();
-  loop();
-  
+});
+
+function setPosTools() {
   const tools = document.getElementsByClassName("tools");
 
   for (let i = 0; i < tools.length; i++) {
     tools[0].object3D.position.set("-10", "1", "-17");
     tools[1].object3D.position.set("-9", "0.9", "-17");
-
-    console.log(tools[0].object3D.position);
-    console.log(tools[1].object3D.position);
   }
-});
+}
 
-function loop() {
+function loopCollision() {
   const fossils = document.getElementsByClassName("fossils");
   const tools = document.getElementsByClassName("tools");
 
@@ -37,45 +38,7 @@ function loop() {
       }
     }
   }
-  setTimeout(loop, 10);
-}
-
-function movePlayer() {
-  AFRAME.registerComponent("thumbstick-logging", {
-    init: function () {
-      this.el.addEventListener("thumbstickmoved", this.movePlayer.bind(this));
-    },
-    movePlayer: function (evt) {
-      const cameraRig = this.el;
-      const speed = 0.03;
-      const newPosition = {
-        x: cameraRig.getAttribute("position").x + evt.detail.x * speed,
-        y: cameraRig.getAttribute("position").y,
-        z: cameraRig.getAttribute("position").z + evt.detail.y * speed,
-      };
-
-      cameraRig.object3D.position.set(
-        newPosition.x,
-        newPosition.y,
-        newPosition.z
-      );
-    },
-  });
-}
-
-function collision(obj1, obj2) {
-  let xobj1 = obj1.object3D.position.x;
-  let yobj1 = obj1.object3D.position.y;
-  let zobj1 = obj1.object3D.position.z;
-  let xobj2 = obj2.object3D.position.x;
-  let yobj2 = obj2.object3D.position.y;
-  let zobj2 = obj2.object3D.position.z;
-
-  let distance = Math.sqrt(
-    (xobj2 - xobj1) ** 2 + (yobj2 - yobj1) ** 2 + (zobj2 - zobj1) ** 2
-  );
-
-  return distance < 1; // 1m
+  setTimeout(loopCollision, 10);
 }
 
 function createBoxes() {
@@ -98,43 +61,41 @@ function createBoxes() {
   }
 }
 
+function randomizePositionCactus() {
+  const scene = document.querySelector("a-scene");
+  const cactus = document.getElementsByClassName("cactus");
+  const cactusEl = cactus[0];
+
+  for (let i = 0; i < 1; i++) {
+    cactusEl === cactus[i];
+    for (let j = 0; j < 5; j++) {
+      cactusPosX = getRandomInt(-20, 20);
+      cactusPosY = getRandomInt(-20, 20);
+  
+      cactusEl.object3D.position.set(cactusPosX, 2, cactusPosY);
+  
+      if ((cactusPosY > -5 && cactusPosY < 6) ||(cactusPosX > -5 && cactusPosX < 6)) {
+        cactusPosX = getRandomInt(-20, 20);
+        cactusPosY = getRandomInt(-20, 20);
+      }
+      scene.appendChild(cactusEl);
+    }
+  }
+}
+
 function randomizePositionFossils() {
   const fossils = document.getElementsByClassName("fossils");
-  const tools = document.getElementsByClassName("tools");
 
   for (let i = 0; i < fossils.length; i++) {
-    const fossilEl = fossils[i];
-    let fossilElID = fossilEl.getAttribute("gltf-model");
+    let fossilElID = fossils[i].getAttribute("gltf-model");
 
     fossilsPosX = getRandomInt(-5, 6);
     fossilsPosY = getRandomInt(-5, 6);
 
-    if (fossilsPosX == 0 || fossilsPosY == 0) {
-      fossilsPosX = getRandomInt(-5, 6);
-      fossilsPosY = getRandomInt(-5, 6);
-    }
-
-    // fossilPositions = array[0.6, -0.4, 0.4, 0.9];
-    // fossilModels = array["#fossil-1", "#fossil-2", "#fossil-3", "#fossil-4"]
-
-    // for (let i = 0; i < fossils.length; i++) {
-    //   const element = array[i];
-
-    //   if (fossilElID == "fossil-" + (i + 1)) {
-    //   }
-
-    if (fossilElID == "fossil-1") {
-      fossilEl.object3D.position.set(fossilsPosX, 0.6, fossilsPosY);
-    }
-    if (fossilElID == "fossil-2") {
-      fossilEl.object3D.position.set(fossilsPosX, -0.4, fossilsPosY);
-    }
-    if (fossilElID == "fossil-3") {
-      fossilEl.object3D.position.set(fossilsPosX, 0.4, fossilsPosY);
-    }
-    if (fossilElID == "fossil-4") {
-      fossilEl.object3D.position.set(fossilsPosX, 0.9, fossilsPosY);
-    }
+    fossils[i].object3D.position.set(fossilsPosX, "0.9", fossilsPosY);
+    // fossils[1].object3D.position.set(fossilsPosX, "-0.4", fossilsPosY);
+    // fossils[2].object3D.position.set(fossilsPosX, "0.4", fossilsPosY);
+    // fossils[3].object3D.position.set(fossilsPosX, "0.9", fossilsPosY);
   }
 }
 
@@ -192,9 +153,30 @@ function earthQuake() {
 }
 
 function getRandomInt(min, max) {
+  let randomValue;
   min = Math.ceil(min); //inclusive
   max = Math.floor(max); //exclusive
-  return Math.floor(Math.random() * (max - min) + min);
+
+  do {
+    randomValue = Math.floor(Math.random() * (max - min) + min);
+  } while (randomValue === 0);
+
+  return randomValue;
+}
+
+function collision(obj1, obj2) {
+  let xobj1 = obj1.object3D.position.x;
+  let yobj1 = obj1.object3D.position.y;
+  let zobj1 = obj1.object3D.position.z;
+  let xobj2 = obj2.object3D.position.x;
+  let yobj2 = obj2.object3D.position.y;
+  let zobj2 = obj2.object3D.position.z;
+
+  let distance = Math.sqrt(
+    (xobj2 - xobj1) ** 2 + (yobj2 - yobj1) ** 2 + (zobj2 - zobj1) ** 2
+  );
+
+  return distance < 1; // 1m
 }
 
 function playSound() {
@@ -213,3 +195,27 @@ function playSound() {
     }
   });
 }
+
+function movePlayer() {
+  AFRAME.registerComponent("thumbstick-logging", {
+    init: function () {
+      this.el.addEventListener("thumbstickmoved", this.movePlayer.bind(this));
+    },
+    movePlayer: function (evt) {
+      const cameraRig = this.el;
+      const speed = 0.03;
+      const newPosition = {
+        x: cameraRig.getAttribute("position").x + evt.detail.x * speed,
+        y: cameraRig.getAttribute("position").y,
+        z: cameraRig.getAttribute("position").z + evt.detail.y * speed,
+      };
+
+      cameraRig.object3D.position.set(
+        newPosition.x,
+        newPosition.y,
+        newPosition.z
+      );
+    },
+  });
+}
+ 
