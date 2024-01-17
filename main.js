@@ -1,19 +1,9 @@
 let camera;
 let numberOfEarthQuakes = 5;
 
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", () => {
   cameraRig.setAttribute("position", { x: 0, y: 0.5, z: 0 });
   camera = document.getElementById("js--camera");
-
-  const tools = document.getElementsByClassName("tools");
-
-  for (let i = 0; i < tools.length; i++) {
-    tools[0].object3D.position.set("-10", "1", "-17");
-    tools[1].object3D.position.set("-9", "0.9", "-17");
-
-    console.log(tools[0].object3D.position);
-    console.log(tools[1].object3D.position);
-  }
 
   movePlayer();
   createBoxes();
@@ -21,19 +11,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // startEarthQuake(4000);
   playSound();
   loop();
+  
+  const tools = document.getElementsByClassName("tools");
+
+  for (let i = 0; i < tools.length; i++) {
+    tools[0].object3D.position.set("-10", "1", "-17");
+    tools[1].object3D.position.set("-9", "0.9", "-17");
+
+    tools[i].setAttribute("position", tools[i].object3D.position);
+
+    console.log(tools[0].object3D.position);
+    console.log(tools[1].object3D.position);
+  }
 });
 
 function loop() {
   const fossils = document.getElementsByClassName("fossils");
   const tools = document.getElementsByClassName("tools");
+  const dig = document.getElementById("sound-dig");
+      dig.play();
 
   for (let i = 0; i < fossils.length; i++) {
-    for (let i = 0; i < tools.length; i++) {
-
-      if (collision(tools[i], fossils[i])) {
-        // console.log(tools[i].object3D.position);
-        // console.log(fossils[i].object3D.position);
+    for (let j = 0; j < tools.length; j++) {
+      if (collision(tools[j], fossils[i])) {
         document.getElementById("tekst").setAttribute("value", "MAGIE");
+        break; // exit the inner loop once a collision is found
+      } else {
+        document.getElementById("tekst").setAttribute("value", "none"); // reset value if no collision
       }
     }
   }
@@ -52,6 +56,8 @@ function movePlayer() {
         x: cameraRig.getAttribute("position").x + evt.detail.x * speed,
         y: cameraRig.getAttribute("position").y,
         z: cameraRig.getAttribute("position").z + evt.detail.y * speed,
+        
+  
       };
 
       cameraRig.object3D.position.set(
