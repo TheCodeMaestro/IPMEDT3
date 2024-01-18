@@ -21,16 +21,8 @@ function setPosTools() {
   }
 }
 
-function loopCollision() {
-  for (let i = 0; i < tools.length; i++) {
-    for (let j = 0; j < fossils.length; j++) {
-      if (collision(tools[i], fossils[j])) {
-        fossils[j].remove();
-        break;
-      }
-    }
-  }
-  setTimeout(loopCollision, 10);
+function setStateFossil() {
+  
 }
 
 function randomizePositionFossils() {
@@ -42,16 +34,16 @@ function randomizePositionFossils() {
   }
 }
 
-function getRandomInt(min, max) {
-  let randomValue;
-  min = Math.ceil(min); //inclusive
-  max = Math.floor(max); //exclusive
-
-  do {
-    randomValue = Math.floor(Math.random() * (max - min) + min);
-  } while (randomValue === 0);
-
-  return randomValue;
+function loopCollision() {
+  for (let i = 0; i < tools.length; i++) {
+    for (let j = 0; j < fossils.length; j++) {
+      if (collision(tools[i], fossils[j])) {
+        fossils[j].remove();
+        break;
+      }
+    }
+  }
+  setTimeout(loopCollision, 10);
 }
 
 function collision(obj1, obj2) {
@@ -67,6 +59,18 @@ function collision(obj1, obj2) {
   );
 
   return distance < 1; // 1m
+}
+
+function getRandomInt(min, max) {
+  let randomValue;
+  min = Math.ceil(min); //inclusive
+  max = Math.floor(max); //exclusive
+
+  do {
+    randomValue = Math.floor(Math.random() * (max - min) + min);
+  } while (randomValue === 0);
+
+  return randomValue;
 }
 
 function playSound() {
