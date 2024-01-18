@@ -1,4 +1,4 @@
-let camera, tools, fossils;
+let camera, tools, fossils, rocks;
 
 document.addEventListener("DOMContentLoaded", () => {
   cameraRig.setAttribute("position", { x: 0, y: 0.1, z: 0 });
@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tools = document.getElementsByClassName("tools");
   fossils = document.getElementsByClassName("fossils");
+  rocks = document.getElementsByClassName("rocks");
 
   movePlayer();
-  randomizePositionFossils();
+  randomizePositionFossilsAndRocks();
   setPosTools();
   loopCollision();
   playSound();
-  setStateFossil();
 });
 
 function setPosTools() {
@@ -22,16 +22,13 @@ function setPosTools() {
   }
 }
 
-function setStateFossil(fossilTarget) {
-
-}
-
-function randomizePositionFossils() {
+function randomizePositionFossilsAndRocks() {
   for (let i = 0; i < fossils.length; i++) {
-    fossilsPosX = getRandomInt(-9, 10);
-    fossilsPosY = getRandomInt(-9, 10);
+    posX = getRandomInt(-9, 10);
+    posY = getRandomInt(-9, 10);
 
-    fossils[i].object3D.position.set(fossilsPosX, "0", fossilsPosY);
+    fossils[i].object3D.position.set(posX, "0", posY);
+    rocks[i].object3D.position.set(posX, "-0.05", posY);
   }
 }
 
