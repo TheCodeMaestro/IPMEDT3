@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   loopCollision();
   randomizePositionCactus();
   playSound();
-  const oldPickaxeLocation = oldPickaxe.getAttribute("position");
-  const oldPshovelLocation = oldPshovel.getAttribute("position");
 });
 
 function setPosTools() {
@@ -24,17 +22,17 @@ function setPosTools() {
   }
 }
 
+let number = 0;
+
 function loopCollision() {
   const fossils = document.getElementsByClassName("fossils");
   const tools = document.getElementsByClassName("tools");
 
-  for (let i = 0; i < fossils.length; i++) {
-    for (let j = 0; j < tools.length; j++) {
-      if (collision(tools[j], fossils[i])) {
-        document.getElementById("tekst").setAttribute("value", "MAGIE");
+  for (let i = 0; i < tools.length; i++) {
+    for (let j = 0; j < fossils.length; j++) {
+      if (collision(tools[i], fossils[j])) {
+        fossils[j].remove();
         break;
-      } else {
-        document.getElementById("tekst").setAttribute("value", "none");
       }
     }
   }
@@ -133,20 +131,6 @@ function movePlayer() {
       };
 
       cameraRig.object3D.position.set(newPosition.x, newPosition.y, newPosition.z);
-      
-      const pickaxe = document.getElementById("pickaxe")
-      const shovel = document.getElementById("shovel")
-      
-      const newPickaxeLocation = document.getElementById("pickaxe").getAttribute("position");
-      const newPshovelLocation = document.getElementsById("shovel").getAttribute("position");
-
-      if (oldPickaxeLocation != newPickaxeLocation) {
-        pickaxe.setAttribute("rotation", "90 90 90");
-      };
-      if (oldShovelLocation != newShovelLocation) {
-        shovel.setAttribute("rotation", "90 90 90");
-      };
-
     },
   });
 }
