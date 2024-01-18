@@ -21,8 +21,10 @@
         <a-asset-item id="tent" src="obj/tent.glb"></a-asset-item>
         <a-asset-item id="cactus-1" src="obj/cactus/cactus1.glb"></a-asset-item>
         <a-asset-item id="cactus-2" src="obj/cactus/cactus2.glb"></a-asset-item>
-        <asset-item id="rock-1" src="obj/rock/rock1.glb"></asset-item>
-        <asset-item id="rock-2" src="obj/rock/rock2.glb"></asset-item>
+        <a-asset-item id="rock-1" src="obj/env/rock1.glb"></a-asset-item>
+        <a-asset-item id="rock-2" src="obj/env/rock2.glb"></a-asset-item>
+        <a-asset-item id="dirtlayer" src="obj/env/dirtLayer.glb"></a-asset-item>
+        <a-asset-item id="board" src="obj/env/pokemon-bord.glb"></a-asset-item>
       </a-assets>
 
       <a-entity id="cameraRig" thumbstick-logging>
@@ -72,11 +74,13 @@
       <a-entity class="cactus" static-body gltf-model="#cactus-2" position="-10 0.8 -14" scale="0.2 0.2 0.2"></a-entity>
 
       <!-- tutorial-area -->
-      <a-text value="Gebruik de schep om de aarde laag weg te schepen"
-      color="white" position="-12 1 -2" rotation="0 90 0"></a-text>
+      <a-entity position="-12.2 1.2 -2" rotation="0 90 0" gltf-model="board"></a-entity>
+      <a-text value="Gebruik de schep om de aarde laag weg te scheppen \n Gebruik de houweel om de steen laag weg te slaan"
+      color="black" position="-12 1.2 -2" rotation="0 90 0" scale="0.5"></a-text>
 
       <!-- <a-entity static-body gltf-model="#rock-1" position="" scale=""></a-entity>
       <a-entity static-body gltf-model="#rock-2" position="" scale=""></a-entity> -->
+      <a-entity static-body gltf-model="#dirtlayer"></a-entity>
       
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
       <audio id="sound-brush" src="sound/brush.mp3"></audio>

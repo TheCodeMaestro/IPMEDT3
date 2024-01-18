@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setPosTools();
   loopCollision();
   playSound();
+  setStateFossil();
 });
 
 function setPosTools() {
@@ -21,8 +22,8 @@ function setPosTools() {
   }
 }
 
-function setStateFossil() {
-  
+function setStateFossil(fossilTarget) {
+
 }
 
 function randomizePositionFossils() {
