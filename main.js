@@ -1,33 +1,27 @@
-let camera;
-let numberOfEarthQuakes = 5;
+let camera, tools, fossils;
 
 document.addEventListener("DOMContentLoaded", () => {
   cameraRig.setAttribute("position", { x: 0, y: 0.1, z: 0 });
   camera = document.getElementById("js--camera");
 
+  tools = document.getElementsByClassName("tools");
+  fossils = document.getElementsByClassName("fossils");
+
   movePlayer();
   randomizePositionFossils();
   setPosTools();
   loopCollision();
-  randomizePositionCactus();
   playSound();
 });
 
 function setPosTools() {
-  const tools = document.getElementsByClassName("tools");
-
   for (let i = 0; i < tools.length; i++) {
     tools[0].object3D.position.set("-10", "1", "-17");
     tools[1].object3D.position.set("-9", "0.9", "-17");
   }
 }
 
-let number = 0;
-
 function loopCollision() {
-  const fossils = document.getElementsByClassName("fossils");
-  const tools = document.getElementsByClassName("tools");
-
   for (let i = 0; i < tools.length; i++) {
     for (let j = 0; j < fossils.length; j++) {
       if (collision(tools[i], fossils[j])) {
@@ -39,22 +33,7 @@ function loopCollision() {
   setTimeout(loopCollision, 10);
 }
 
-function randomizePositionCactus() {
-  const cacti = document.getElementsByClassName("cactus");
-
-  for (let i = 0; i < cacti.length; i++) {
-    cacti[i].setAttribute("rotation", "0 0 0");
-    cacti[i].setAttribute("scale", "0.2 0.2 0.2");
-    
-    cactiPosX = getRandomIntExcluding(-20, 20, -9, 9);
-    cactiPosY = getRandomIntExcluding(-20, 20, -9, 9);
-    cacti[i].object3D.position.set(cactiPosX, "1", cactiPosY);
-  }
-}
-
 function randomizePositionFossils() {
-  const fossils = document.getElementsByClassName("fossils");
-
   for (let i = 0; i < fossils.length; i++) {
     fossilsPosX = getRandomInt(-9, 10);
     fossilsPosY = getRandomInt(-9, 10);
@@ -71,15 +50,6 @@ function getRandomInt(min, max) {
   do {
     randomValue = Math.floor(Math.random() * (max - min) + min);
   } while (randomValue === 0);
-
-  return randomValue;
-}
-
-function getRandomIntExcluding(min, max, excludeMin, excludeMax) {
-  let randomValue;
-  do {
-    randomValue = Math.floor(Math.random() * (max - min + 1) + min);
-  } while (randomValue >= excludeMin && randomValue <= excludeMax);
 
   return randomValue;
 }
