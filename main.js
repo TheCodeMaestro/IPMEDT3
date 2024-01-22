@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function setPosTools() {
   for (let i = 0; i < tools.length; i++) {
-    tools[0].object3D.position.set("-10", "1", "-17");
-    tools[1].object3D.position.set("-9", "0.9", "-17");
+    tools[0].object3D.position.set("-13", "1", "3.6");
+    tools[1].object3D.position.set("-13", "1", "2.6");
   }
 }
 
@@ -37,30 +37,19 @@ function randomizePositionFossilsAndRocks() {
 function loopCollision() {
   for (let i = 0; i < tools.length; i++) {
     for (let j = 0; j < earthLayer.length; j++) {
-      tool = tools[i];
-      stone = stoneLayer[j];
-      earth = earthLayer[j];
-      removeLayer(tool, stone, earth);
-      break;
+      if (collision(tools[i], earthLayer[j])) { // dont change order! otherwise won't work!
+        if (tools[i].getAttribute("id") == "shovel-tool" && earthLayer[j].getAttribute("class") == "earth"){
+          earthLayer[j].remove();
+          break;
+        }
+        if (tools[i].getAttribute("id") == "pickaxe-tool" && stoneLayer[j].getAttribute("class") == "stone"){
+          stoneLayer[j].remove();
+          break;
+        }
+      }
     }
   }
   setTimeout(loopCollision, 10);
-}
-
-function removeLayer(tool, stone, earth) {
-  if (collision(tool, earth) || collision(tool, stone)) { // dont change order! otherwise won't work!
-    if (tool.getAttribute("id") == "pickaxe-tool" && stone.getAttribute("class") == "stone"){
-      stone.remove();
-      const mine = document.getElementById("sound-mine");
-      mine.play();
-    }
-    
-    if (tool.getAttribute("id") == "shovel-tool" && earth.getAttribute("class") == "earth"){
-      earth.remove();
-      const dig = document.getElementById("sound-dig");
-      dig.play();
-    }
-  }
 }
 
 function collision(obj1, obj2) {
