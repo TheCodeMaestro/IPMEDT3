@@ -39,10 +39,14 @@ function loopCollision() {
     for (let j = 0; j < earthLayer.length; j++) {
       if (collision(tools[i], earthLayer[j])) { // dont change order! otherwise won't work!
         if (tools[i].getAttribute("id") == "shovelTool" && earthLayer[j].getAttribute("class") == "earth"){
+          const dig = document.getElementById("sound-dig");
+          dig.play();
           earthLayer[j].remove();
           break;
         }
         if (tools[i].getAttribute("id") == "pickaxeTool" && stoneLayer[j].getAttribute("class") == "stone"){
+          const mine = document.getElementById("sound-mine");
+          mine.play();
           stoneLayer[j].remove();
           break;
         }
