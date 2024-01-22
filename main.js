@@ -35,18 +35,18 @@ function randomizePositionFossilsAndRocks() {
 }
 
 function loopCollision() {
-  for (let i = 0; i < tools.length; i++) {
-    for (let j = 0; j < earthLayer.length; j++) {
-      if (collision(tools[i], earthLayer[j])) { // dont change order! otherwise won't work!
-        if (tools[i].getAttribute("id") == "shovel-tool" && earthLayer[j].getAttribute("class") == "earth"){
-          earthLayer[j].remove();
-          break;
-        }
-        if (tools[i].getAttribute("id") == "pickaxe-tool" && stoneLayer[j].getAttribute("class") == "stone"){
-          stoneLayer[j].remove();
-          break;
-        }
-      }
+  // tool[0] = pickaxe
+
+  for (let i = 0; i < stoneLayer.length; i++) {
+    if (collision(tools[0], stoneLayer[i])) {
+      stoneLayer[i].remove();
+      break;
+    }
+  }
+  for (let j = 0; j < earthLayer.length; j++) {
+    if (collision(tools[1], earthLayer[j])) {
+      earthLayer[j].remove();
+      break;
     }
   }
   setTimeout(loopCollision, 10);
