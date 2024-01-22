@@ -1,4 +1,6 @@
-let camera, tools, fossils, earthLayer, stoneLayer;
+let camera, tools, fossils, earthLayer, stoneLayer, scanner;
+const mine = document.getElementById("sound-mine");
+const dig = document.getElementById("sound-dig");
 
 document.addEventListener("DOMContentLoaded", () => {
   cameraRig.setAttribute("position", { x: 0, y: 0.1, z: 0 });
@@ -9,12 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
   invisFossils = document.getElementsByClassName("invis-fossil");
   earthLayer = document.getElementsByClassName("earth");
   stoneLayer = document.getElementsByClassName("stone");
+  scanner = document.getElementById("scanner");
 
   movePlayer();
   randomizePositionFossilsAndRocks();
   setPosTools();
   loopCollision();
-
   
   // console.log(newPosition);
 
@@ -25,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function setPosTools() {
   for (let i = 0; i < tools.length; i++) {
-    tools[0].object3D.position.set("-13", "1", "3.6");
-    tools[1].object3D.position.set("-13", "1", "2.6");
+    tools[0].object3D.position.set("-12", "0.8", "2");
+    tools[1].object3D.position.set("-12", "0.5", "1");
   }
 }
 
@@ -45,6 +47,7 @@ function randomizePositionFossilsAndRocks() {
 function loopCollision() {
   for (let i = 0; i < stoneLayer.length; i++) { // pickaxe
     if (collision(tools[0], stoneLayer[i])) {
+      mine.play()
       stoneLayer[i].remove();
       // fossils[j].setAttribute("gltf-model", "#fossil-broken-" + (j + 1));
       break;
@@ -52,21 +55,22 @@ function loopCollision() {
   }
   for (let j = 0; j < earthLayer.length; j++) { // shovel
     if (collision(tools[1], earthLayer[j])) {
+      dig.play();
       earthLayer[j].remove();
       break;
     }
   }
-  for (let k = 0; k < fossils.length; k++) { // shovel
-    if (collision(tools[1], fossils[k])) {
-      fossils[k].remove();
-      id = k + 11;
-      x = fossils[0].object3D.position.x;
-      z = fossils[0].object3D.position.z;
-      newPosition = x + ", 0," + z;
-      document.getElementById("fossil-" + id).setAttribute("position", newPosition)
-      break;
-    }
-  }
+  // for (let k = 0; k < fossils.length; k++) { // shovel
+  //   if (collision(tools[1], fossils[k])) {
+  //     fossils[k].remove();
+  //     id = k + 11;
+  //     x = fossils[0].object3D.position.x;
+  //     z = fossils[0].object3D.position.z;
+  //     newPosition = x + ", 0," + z;
+  //     document.getElementById("fossil-" + id).setAttribute("position", newPosition)
+  //     break;
+  //   }
+  // }
   setTimeout(loopCollision, 10);
 }
 
@@ -115,3 +119,45 @@ function movePlayer() {
     },
   });
 }
+
+
+//scanner code
+let fossilOnScreen = {}
+
+AFRAME.registerComponent('fossil-type', {
+  init: function () {
+    if (collision(scanner, this.el)) {
+      const name = document.getElementById('fossil-name');
+      const age = document.getElementById('fossil-age');
+      const sediment = document.getElementById('fossil-sediment');
+      const description = document.getElementById('fossil-description');
+
+      const modelPath = this.getAttribute('gltf-model');
+      const fossilMap = {
+        'obj/fossil-original-state/fossil1.glb': { name: 'fossil 1', age: 'Jurassic', sediment: 'Sandstone', description: 'This is the first fossil.' },
+        'obj/fossil-original-state/fossil2.glb': { name: 'fossil 2', age: 'Cretaceous', sediment: 'Limestone', description: 'This is the second fossil.' },
+        'obj/fossil-original-state/fossil3.glb': { name: 'fossil 3', age: 'Paleogene', sediment: 'Shale', description: 'This is the third fossil.' },
+        'obj/fossil-original-state/fossil4.glb': { name: 'fossil 4', age: 'Neogene', sediment: 'Mudstone', description: 'This is the fourth fossil.' },
+      };
+    
+      const fossilInfo = fossilMap[modelPath];
+      mine.play();
+    
+      if (fossilInfo) {
+        // fossilOnScreen = fossilInfo;
+        name.setAttribute('value', fossilInfo.name);
+        age.setAttribute('value', fossilInfo.age);
+        sediment.setAttribute('value', fossilInfo.sediment);
+        description.setAttribute('value', fossilInfo.description);
+        // text1.setAttribute('value', "hejedcjjshsbv");
+
+        console.log(`Name: ${fossilInfo.name}`);
+        console.log(`Age: ${fossilInfo.age}`);
+        console.log(`Sediment: ${fossilInfo.sediment}`);
+        console.log(`Description: ${fossilInfo.description}`);
+      } else {
+        console.log('Unknown fossil');
+      }
+    }
+  }
+});

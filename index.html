@@ -43,39 +43,39 @@
           id="leftHand"
           hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
           super-hands
-          sphere-collider="objects: .tool;"
+          sphere-collider="objects: .interact;"
           static-body="shape: sphere; sphereRadius: 0.02">
         </a-entity>
         <a-entity
           id="rightHand"
           hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
           super-hands
-          sphere-collider="objects: .tool;"
+          sphere-collider="objects: .interact;"
           static-body="shape: sphere; sphereRadius: 0.02">
         </a-entity>
       </a-entity>
       <a-entity environment="preset: yavapai"></a-entity>
       
       <!-- fossils -->
-      <a-entity id="fossil-1" class="fossil" static-body gltf-model="#fossil-original-1" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-2" class="fossil" static-body gltf-model="#fossil-original-2" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-3" class="fossil" static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-4" class="fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-1" fossil-type class="fossil" static-body gltf-model="#fossil-original-1" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-2" fossil-type class="fossil" static-body gltf-model="#fossil-original-2" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-3" fossil-type class="fossil" static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-4" fossil-type class="fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
 
-      <a-entity id="fossil-11" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-12" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-13" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-14" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-11" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-12" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-13" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-14" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
       
       <!-- tools -->
-      <a-entity id="pickaxe-tool" class="tool" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
-      <a-entity id="shovel-tool" class="tool" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
+      <a-entity id="pickaxe-tool" class="tool interact" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+      <a-entity id="shovel-tool" class="tool interact" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
 
       <!-- basecamp -->
       <a-entity gltf-model="#tent" position="-11 1.4 -10" scale="0.10 0.10 0.10" rotation="0 320 0"></a-entity>
       <a-entity gltf-model="#tent" position="-12 1.48 -7" scale="0.10 0.10 0.10" rotation="0 360 0"></a-entity>
-      <a-cylinder position="-13 0.7 3.6" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
-      <a-cylinder position="-13 0.7 2.6" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
+      <a-cylinder position="-12 0.5 2" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
+      <a-cylinder position="-12 0.5 1" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
 
       <!-- cactus -->
       <a-entity class="cactus" static-body gltf-model="#cactus-1" position="11 0.8 -11" scale="0.2 0.2 0.2"></a-entity>
@@ -89,9 +89,15 @@
 
       <!-- tutorial-area -->
       <a-entity position="-12.15 0.4 -2.6" rotation="0 95 0" scale="2.3 2 2" gltf-model="#board"></a-entity>
-      <a-text value="Gebruik de schep om de aarde laag weg te scheppen. Gebruik de houweel om de steen laag weg te slaan"
-      color="black" position="-12 1.7 -1.4" rotation="0 95 0" scale="0.5"></a-text>
-
+      <a-text value="Gebruik de schep om de aarde laag weg te scheppen. Gebruik de houweel om de steen laag weg te slaan."
+      color="black" position="-12 1.7 -1.4" rotation="0 95 0" scale="0.5 0.5 0.5"></a-text>
+      <!-- board scanner -->
+      <a-entity position="-5 0.2 -12" rotation="0 0 0" scale="2.3 2 2" gltf-model="#board"></a-entity>
+      <a-text id="fossil-name" value="test1" color="black" position="-5 1.8 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text id="fossil-age" value="test2" color="black" position="-5 1.6 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text id="fossil-sediment" value="test3" color="black" position="-5 1.4 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text id="fossil-description" value="test4" color="black" position="-5 1.1 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      
       <!-- digsite -->
       <a-entity class="stone" gltf-model="#stone-layer" scale="0.10 0.10 0.10"></a-entity>
       <a-entity class="stone" gltf-model="#stone-layer" scale="0.10 0.10 0.10"></a-entity>
@@ -122,11 +128,11 @@
       <a-entity class="pokemon" gltf-model="#pokemon-dugtrio" position="15 0.09 5" rotation="0 180 0" scale="0.18 0.18 0.18"></a-entity>
 
       <!-- Scanner -->
-      <a-entity grabbable id="scanner" position="-1 1 -4" scale="0.1 0.1 0.1" gltf-model="obj/scanner.glb" ></a-entity>
-      <a-entity position="-1 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil1/fossil1.glb"></a-entity>
-      <a-entity position="-3 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil2/fossil2.glb"></a-entity>
-      <a-entity position="-5 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil3/fossil3.glb"></a-entity>
-      <a-entity position="-7 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil4/fossil4.glb"></a-entity>
+      <a-entity grabbable id="scanner" class="interact" position="-0.5 0.5 -1" scale="0.05 0.05 0.05" gltf-model="obj/tools/scanner.glb" ></a-entity>
+      <a-entity position="-1 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil-original-state/fossil1.glb"></a-entity>
+      <a-entity position="-3 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil-original-state/fossil2.glb"></a-entity>
+      <a-entity position="-5 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil-original-state/fossil3.glb"></a-entity>
+      <a-entity position="-7 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil-original-state/fossil4.glb"></a-entity>
 
             
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
