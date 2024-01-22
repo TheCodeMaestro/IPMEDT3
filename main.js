@@ -37,7 +37,10 @@ function randomizePositionFossilsAndRocks() {
 function loopCollision() {
   for (let i = 0; i < tools.length; i++) {
     for (let j = 0; j < earthLayer.length; j++) {
-      removeLayer(tools[i], stoneLayer[j], earthLayer[j]);
+      tool = tools[i];
+      stone = stoneLayer[j];
+      earth = earthLayer[j];
+      removeLayer(tool, stone, earth);
       break;
     }
   }
@@ -47,15 +50,15 @@ function loopCollision() {
 function removeLayer(tool, stone, earth) {
   if (collision(tool, earth) || collision(tool, stone)) { // dont change order! otherwise won't work!
     if (tool.getAttribute("id") == "pickaxe-tool" && stone.getAttribute("class") == "stone"){
+      stone.remove();
       const mine = document.getElementById("sound-mine");
       mine.play();
-      stone.remove();
     }
     
     if (tool.getAttribute("id") == "shovel-tool" && earth.getAttribute("class") == "earth"){
+      earth.remove();
       const dig = document.getElementById("sound-dig");
       dig.play();
-      earth.remove();
     }
   }
 }
