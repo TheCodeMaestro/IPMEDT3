@@ -17,12 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   randomizePositionFossilsAndRocks();
   setPosTools();
   loopCollision();
-  
-  // console.log(newPosition);
-
-  // let testVar = document.getElementById("fossil-original-1");
-  // testVar.setAttribute("gltf-model", "#fossil-broken-");
-  // console.log(testVar);
 });
 
 function setPosTools() {
@@ -119,7 +113,6 @@ function movePlayer() {
     },
   });
 }
-
 
 //scanner code
 let fossilOnScreen = {}
