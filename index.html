@@ -24,6 +24,7 @@
         <a-asset-item id="rock-1" src="obj/env/rock1.glb"></a-asset-item>
         <a-asset-item id="rock-2" src="obj/env/rock2.glb"></a-asset-item>
         <a-asset-item id="dirtlayer" src="obj/env/dirtLayer.glb"></a-asset-item>
+        <a-asset-item id="stoneLayer" src="obj/env/stoneLayer.glb"></a-asset-item>
         <a-asset-item id="board" src="obj/env/pokemon-bord.glb"></a-asset-item>
       </a-assets>
 
@@ -33,35 +34,34 @@
           id="leftHand"
           hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"
           super-hands
-          sphere-collider="objects: .tools;"
+          sphere-collider="objects: .tool;"
           static-body="shape: sphere; sphereRadius: 0.02">
         </a-entity>
         <a-entity
           id="rightHand"
           hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"
           super-hands
-          sphere-collider="objects: .tools;"
+          sphere-collider="objects: .tool;"
           static-body="shape: sphere; sphereRadius: 0.02">
         </a-entity>
       </a-entity>
       <a-entity environment="preset: yavapai"></a-entity>
       
       <!-- fossils -->
-      <a-entity class="fossils" static-body gltf-model="#fossil-original-1" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="fossils" static-body gltf-model="#fossil-original-2" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="fossils" static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="fossils" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossil" static-body gltf-model="#fossil-original-1" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossil" static-body gltf-model="#fossil-original-2" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossil" static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity class="fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
       
       <!-- tools -->
-      <a-entity id="pickaxeTool" class="tools" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
-      <a-entity id="shovelTool" class="tools" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
+      <a-entity id="pickaxeTool" class="tool" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+      <a-entity id="shovelTool" class="tool" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
 
       <!-- basecamp -->
       <a-entity gltf-model="#tent" position="-11 1.4 -10" scale="0.10 0.10 0.10" rotation="0 320 0"></a-entity>
       <a-entity gltf-model="#tent" position="-12 1.48 -7" scale="0.10 0.10 0.10" rotation="0 360 0"></a-entity>
       <a-cylinder position="-13 0.7 3.6" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
       <a-cylinder position="-13 0.7 2.6" height="0.6" radius=".2" segments-radial="18" color="#e1b68a"></a-cylinder>
-
 
       <!-- cactus -->
       <a-entity class="cactus" static-body gltf-model="#cactus-1" position="11 0.8 -11" scale="0.2 0.2 0.2"></a-entity>
@@ -80,14 +80,26 @@
 
       <!-- <a-entity static-body gltf-model="#rock-1" position="" scale=""></a-entity>
       <a-entity static-body gltf-model="#rock-2" position="" scale=""></a-entity> -->
-      <a-entity class="rocks" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity class="rocks" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity class="rocks" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity class="rocks" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity gltf-model="#dirtlayer" position="-11 0.15 -18" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity gltf-model="#dirtlayer" position="-10.2 0.15 10" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity gltf-model="#dirtlayer" position="9.8 0.15 10.2" scale="0.15 0.15 0.15"></a-entity>
-      <a-entity gltf-model="#dirtlayer" position="10 0.15 -10" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" scale="0.10 0.10 0.10"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" scale="0.10 0.10 0.10"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" scale="0.10 0.10 0.10"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" scale="0.10 0.10 0.10"></a-entity>
+
+      <a-entity class="earth" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="earth" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="earth" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="earth" gltf-model="#dirtlayer" scale="0.15 0.15 0.15"></a-entity>
+
+      <!-- decoration -->
+      <a-entity class="stone" gltf-model="#stonelayer" position="-11 0.15 -18" scale="0.10 0.10 0.10"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" position="-10.2 0.15 10" scale="0.10 0.10 0.10"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" position="9.8 0.15 10.2" scale="0.10 0.10 0.10"></a-entity>
+      <a-entity class="stone" gltf-model="#stonelayer" position="10 0.15 -10" scale="0.10 0.10 0.10"></a-entity>
+
+      <a-entity class="earth" gltf-model="#earthlayer" position="-11 0.15 -18" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="earth" gltf-model="#earthlayer" position="-10.2 0.15 10" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="earth" gltf-model="#earthlayer" position="9.8 0.15 10.2" scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="earth" gltf-model="#earthlayer" position="10 0.15 -10" scale="0.15 0.15 0.15"></a-entity>
 
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
       <audio id="sound-brush" src="sound/brush.mp3"></audio>

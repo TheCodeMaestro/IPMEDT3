@@ -1,12 +1,13 @@
-let camera, tools, fossils, rocks;
+let camera, tools, fossils, earthLayer, stoneLayer;
 
 document.addEventListener("DOMContentLoaded", () => {
   cameraRig.setAttribute("position", { x: 0, y: 0.1, z: 0 });
   camera = document.getElementById("js--camera");
 
-  tools = document.getElementsByClassName("tools");
-  fossils = document.getElementsByClassName("fossils");
-  rocks = document.getElementsByClassName("rocks");
+  tools = document.getElementsByClassName("tool");
+  fossils = document.getElementsByClassName("fossil");
+  earthLayer = document.getElementsByClassName("earth");
+  stoneLayer = document.getElementsByClassName("stone");
 
   movePlayer();
   randomizePositionFossilsAndRocks();
@@ -28,16 +29,23 @@ function randomizePositionFossilsAndRocks() {
     posY = getRandomInt(-9, 10);
 
     fossils[i].object3D.position.set(posX, "0", posY);
-    rocks[i].object3D.position.set(posX, "-0.05", posY);
+    earthLayer[i].object3D.position.set(posX, "-0.05", posY);
+    stoneLayer[i].object3D.position.set(posX, "-0.05", posY);
   }
 }
 
 function loopCollision() {
   for (let i = 0; i < tools.length; i++) {
-    for (let j = 0; j < fossils.length; j++) {
-      if (collision(tools[i], fossils[j])) {
-        fossils[j].remove();
-        break;
+    for (let j = 0; j < earthLayer.length; j++) {
+      if (collision(tools[i], earthLayer[j])) { // dont change order! otherwise won't work!
+        if (tools[i].getAttribute("id") == "shovelTool" && earthLayer[j].getAttribute("class") == "earth"){
+          earthLayer[j].remove();
+          break;
+        }
+        if (tools[i].getAttribute("id") == "pickaxeTool" && stoneLayer[j].getAttribute("class") == "stone"){
+          stoneLayer[j].remove();
+          break;
+        }
       }
     }
   }
