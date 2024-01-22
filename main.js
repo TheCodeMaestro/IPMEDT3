@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tools = document.getElementsByClassName("tool");
   fossils = document.getElementsByClassName("fossil");
+  invisFossils = document.getElementsByClassName("invis-fossil");
   earthLayer = document.getElementsByClassName("earth");
   stoneLayer = document.getElementsByClassName("stone");
 
@@ -14,7 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setPosTools();
   loopCollision();
 
-  fossils[0].getAttribute("gltf-model");
+  // let testVar = document.getElementById("fossil-original-1");
+  // testVar.setAttribute("gltf-model", "#fossil-broken-");
+  // console.log(testVar);
 });
 
 function setPosTools() {
@@ -30,6 +33,7 @@ function randomizePositionFossilsAndRocks() {
     posY = getRandomInt(-9, 10);
 
     fossils[i].object3D.position.set(posX, "0", posY);
+    invisFossils[i].object3D.position.set(posX, "-5", posY);
     earthLayer[i].object3D.position.set(posX, "-0.05", posY);
     stoneLayer[i].object3D.position.set(posX, "-0.05", posY);
   }
@@ -39,6 +43,7 @@ function loopCollision() {
   for (let i = 0; i < stoneLayer.length; i++) { // pickaxe
     if (collision(tools[0], stoneLayer[i])) {
       stoneLayer[i].remove();
+      // fossils[j].setAttribute("gltf-model", "#fossil-broken-" + (j + 1));
       break;
     }
   }
@@ -48,29 +53,27 @@ function loopCollision() {
       break;
     }
   }
-  // for (let k = 1; k < fossils.length + 1; k++) {
-  //   if (collision(tools[0], fossils[k])) {
-  //     fossils[k].setAttribute("gltf-model", "fossil-broken-" + k);
-  //     break;
+  for (let k = 0; k < fossils.length; k++) { // shovel
+    if (collision(tools[1], fossils[k])) {
+      fossils[k].remove();
+      id = k + 11;
+      x = fossils[k].object3D.position.x;
+      z = fossils[k].object3D.position.z;
+      newPosition = x + " 0 " + z;
+      document.getElementById("fossil-" + id).setAttribute("position", newPosition)
+      break;
+    }
+  }
+
+  // setTimeout(function() {
+  //   for (let k = 0; k < fossils.length; k++) {
+  //     if (collision(tools[0][1], fossils[k])) {
+  //       fossils[k].setAttribute("gltf-model", "#fossil-broken-" + (k + 1));
+  //     }
   //   }
-  // }
-  // for (let k = 0; k < fossils.length; k++) { // shovel
-  //   if (collision(tools[0][1], fossils[k])) {
-  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-1")){
-  //        fossils[k].setAttribute("gltf-model", "fossil-broken-1"); 
-  //     }
-  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-2")){
-  //       fossils[k].setAttribute("gltf-model", "fossil-broken-2"); 
-  //     }
-  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-3")){
-  //       fossils[k].setAttribute("gltf-model", "fossil-broken-3"); 
-  //     }
-  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-4")){
-  //       fossils[k].setAttribute("gltf-model", "fossil-broken-4"); 
-  //     }
-  //     break;
-  //   }
-  // }
+  // }, 1000);
+  
+
   setTimeout(loopCollision, 10);
 }
 

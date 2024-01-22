@@ -23,6 +23,7 @@
         <a-asset-item id="fossil-broken-4" src="obj/fossil-broken-state/kapotteFossil4.glb"></a-asset-item>
 
         <a-asset-item id="pokemon-diglet" src="obj/pokemon/diglet.glb"></a-asset-item>
+        <a-asset-item id="pokemon-dugtrio" src="obj/pokemon/dugtrio.glb"></a-asset-item>
 
         <a-asset-item id="pickaxe" src="obj/tools/pickaxe.glb"></a-asset-item>
         <a-asset-item id="shovel" src="obj/tools/schep.glb"></a-asset-item>
@@ -56,14 +57,19 @@
       <a-entity environment="preset: yavapai"></a-entity>
       
       <!-- fossils -->
-      <a-entity class="fossil" fossil-type static-body gltf-model="#fossil-original-1" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="fossil" fossil-type static-body gltf-model="#fossil-original-2" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="fossil" fossil-type static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity class="fossil" fossil-type static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-1" class="fossil" static-body gltf-model="#fossil-original-1" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-2" class="fossil" static-body gltf-model="#fossil-original-2" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-3" class="fossil" static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-4" class="fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+
+      <a-entity id="fossil-11" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-12" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-13" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
+      <a-entity id="fossil-14" class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
       
       <!-- tools -->
-      <a-entity id="pickaxe-tool" tool-type class="tool" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
-      <a-entity id="shovel-tool" tool-type class="tool" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
+      <a-entity id="pickaxe-tool" class="tool" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
+      <a-entity id="shovel-tool" class="tool" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
 
       <!-- basecamp -->
       <a-entity gltf-model="#tent" position="-11 1.4 -10" scale="0.10 0.10 0.10" rotation="0 320 0"></a-entity>
@@ -109,7 +115,11 @@
       <a-entity class="earth" gltf-model="#dirt-layer" position="10 0.15 -10" scale="0.15 0.15 0.15"></a-entity>
 
       <!-- pokemon -->
-      <a-entity class="pokemon" gltf-model="#pokemon-diglet" position="12 0.15 -10" rotation="0 " scale="0.15 0.15 0.15"></a-entity>
+      <a-entity class="pokemon" gltf-model="#pokemon-diglet" position="12 0.05 -10" rotation="0 210 0" scale="0.18 0.18 0.18"></a-entity>
+      <a-entity class="pokemon" gltf-model="#pokemon-diglet" position="13 0.05 -9" rotation="0 205 0" scale="0.18 0.18 0.18"></a-entity>
+      <a-entity class="pokemon" gltf-model="#pokemon-diglet" position="-13 0.14 4.6" rotation="0 25 0" scale="0.18 0.18 0.18"></a-entity>
+      <a-entity class="pokemon" gltf-model="#pokemon-diglet" position="-12 0.09 5.6" rotation="0 20 0" scale="0.18 0.18 0.18"></a-entity>
+      <a-entity class="pokemon" gltf-model="#pokemon-dugtrio" position="15 0.09 5" rotation="0 180 0" scale="0.18 0.18 0.18"></a-entity>
 
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
       <audio id="sound-brush" src="sound/brush.mp3"></audio>
