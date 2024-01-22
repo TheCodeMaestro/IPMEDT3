@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setPosTools();
   loopCollision();
 
+  
+  // console.log(newPosition);
+
   // let testVar = document.getElementById("fossil-original-1");
   // testVar.setAttribute("gltf-model", "#fossil-broken-");
   // console.log(testVar);
@@ -57,23 +60,13 @@ function loopCollision() {
     if (collision(tools[1], fossils[k])) {
       fossils[k].remove();
       id = k + 11;
-      x = fossils[k].object3D.position.x;
-      z = fossils[k].object3D.position.z;
-      newPosition = x + " 0 " + z;
+      x = fossils[0].object3D.position.x;
+      z = fossils[0].object3D.position.z;
+      newPosition = x + ", 0," + z;
       document.getElementById("fossil-" + id).setAttribute("position", newPosition)
       break;
     }
   }
-
-  // setTimeout(function() {
-  //   for (let k = 0; k < fossils.length; k++) {
-  //     if (collision(tools[0][1], fossils[k])) {
-  //       fossils[k].setAttribute("gltf-model", "#fossil-broken-" + (k + 1));
-  //     }
-  //   }
-  // }, 1000);
-  
-
   setTimeout(loopCollision, 10);
 }
 
@@ -122,15 +115,3 @@ function movePlayer() {
     },
   });
 }
-
-AFRAME.registerComponent('fossil-type', {
-  init: function () {
-
-  }
-});
-
-// AFRAME.registerComponent('tool-type', {
-//   init: function () {
-
-//   }
-// });
