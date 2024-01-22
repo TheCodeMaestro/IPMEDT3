@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   randomizePositionFossilsAndRocks();
   setPosTools();
   loopCollision();
-  playSound();
+
+  fossils[0].getAttribute("gltf-model");
 });
 
 function setPosTools() {
@@ -35,20 +36,41 @@ function randomizePositionFossilsAndRocks() {
 }
 
 function loopCollision() {
-  // tool[0] = pickaxe
-
-  for (let i = 0; i < stoneLayer.length; i++) {
+  for (let i = 0; i < stoneLayer.length; i++) { // pickaxe
     if (collision(tools[0], stoneLayer[i])) {
       stoneLayer[i].remove();
       break;
     }
   }
-  for (let j = 0; j < earthLayer.length; j++) {
+  for (let j = 0; j < earthLayer.length; j++) { // shovel
     if (collision(tools[1], earthLayer[j])) {
       earthLayer[j].remove();
       break;
     }
   }
+  // for (let k = 1; k < fossils.length + 1; k++) {
+  //   if (collision(tools[0], fossils[k])) {
+  //     fossils[k].setAttribute("gltf-model", "fossil-broken-" + k);
+  //     break;
+  //   }
+  // }
+  // for (let k = 0; k < fossils.length; k++) { // shovel
+  //   if (collision(tools[0][1], fossils[k])) {
+  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-1")){
+  //        fossils[k].setAttribute("gltf-model", "fossil-broken-1"); 
+  //     }
+  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-2")){
+  //       fossils[k].setAttribute("gltf-model", "fossil-broken-2"); 
+  //     }
+  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-3")){
+  //       fossils[k].setAttribute("gltf-model", "fossil-broken-3"); 
+  //     }
+  //     if (fossils[k].getAttribute("gltf-model" == "fossil-original-4")){
+  //       fossils[k].setAttribute("gltf-model", "fossil-broken-4"); 
+  //     }
+  //     break;
+  //   }
+  // }
   setTimeout(loopCollision, 10);
 }
 
@@ -79,23 +101,6 @@ function getRandomInt(min, max) {
   return randomValue;
 }
 
-function playSound() {
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "z" || event.key === "Z") {
-      const mine = document.getElementById("sound-mine");
-      mine.play();
-    }
-    if (event.key === "x" || event.key === "X") {
-      const brush = document.getElementById("sound-brush");
-      brush.play();
-    }
-    if (event.key === "c" || event.key === "C") {
-      const dig = document.getElementById("sound-dig");
-      dig.play();
-    }
-  });
-}
-
 function movePlayer() {
   AFRAME.registerComponent("thumbstick-logging", {
     init: function () {
@@ -114,3 +119,15 @@ function movePlayer() {
     },
   });
 }
+
+AFRAME.registerComponent('fossil-type', {
+  init: function () {
+
+  }
+});
+
+// AFRAME.registerComponent('tool-type', {
+//   init: function () {
+
+//   }
+// });
