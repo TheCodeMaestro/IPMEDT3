@@ -62,3 +62,34 @@ document.addEventListener("keydown", function (event) {
     dig.play();
   }
 });
+
+
+// scanner code
+
+let fossilOnScreen = {}
+
+AFRAME.registerComponent('fossil-type', {
+  init: function () {
+    this.el.addEventListener('click', function (evt) {
+      const modelPath = this.getAttribute('gltf-model');
+      const fossilMap = {
+        'obj/fossil1/fossil1.glb': { name: 'fossil 1', age: 'Jurassic', sediment: 'Sandstone', description: 'This is the first fossil.' },
+        'obj/fossil2/fossil2.glb': { name: 'fossil 2', age: 'Cretaceous', sediment: 'Limestone', description: 'This is the second fossil.' },
+        'obj/fossil3/fossil3.glb': { name: 'fossil 3', age: 'Paleogene', sediment: 'Shale', description: 'This is the third fossil.' },
+        'obj/fossil4/fossil4.glb': { name: 'fossil 4', age: 'Neogene', sediment: 'Mudstone', description: 'This is the fourth fossil.' },
+      };
+    
+      const fossilInfo = fossilMap[modelPath];
+    
+      if (fossilInfo) {
+        fossilOnScreen = fossilInfo;
+        console.log(`Name: ${fossilInfo.name}`);
+        console.log(`Age: ${fossilInfo.age}`);
+        console.log(`Sediment: ${fossilInfo.sediment}`);
+        console.log(`Description: ${fossilInfo.description}`);
+      } else {
+        console.log('Unknown fossil');
+      }
+    });
+  }
+});

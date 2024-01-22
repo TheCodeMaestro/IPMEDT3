@@ -19,9 +19,9 @@
       </a-assets>
 
       <a-camera>
-        <!-- <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+        <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
         material="color: black; shader: flat">
-        </a-entity> -->
+        </a-entity>
       </a-camera>
       
       <a-entity
@@ -46,12 +46,22 @@
         color="yellow"
       ></a-box>
 
+      <a-entity grabbable position="-1 0.25 -4" scale="1" obj-model="obj: #shovel-obj; mtl: #shovel-mtl"></a-entity>
+
+      
+
       <!-- Audio afspelen test (druk op toets z, x of c) -->
       <audio id="mine" src="sounds/mine.mp3"></audio>
       <audio id="brush" src="sounds/brush.mp3"></audio>
       <audio id="dig" src="sounds/dig.mp3"></audio>
 
-      <a-entity grabbable position="-1 0.25 -4" scale="1" obj-model="obj: #shovel-obj; mtl: #shovel-mtl"></a-entity>
+      <!-- Scanner -->
+      <a-entity grabbable id="scanner" position="-1 1 -4" scale="0.1 0.1 0.1" gltf-model="obj/scanner.glb" ></a-entity>
+      <a-entity position="-1 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil1/fossil1.glb"></a-entity>
+      <a-entity position="-3 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil2/fossil2.glb"></a-entity>
+      <a-entity position="-5 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil3/fossil3.glb"></a-entity>
+      <a-entity position="-7 1 -6" scale="0.5 0.5 0.5" fossil-type gltf-model="obj/fossil4/fossil4.glb"></a-entity>
+
     </a-scene>
   </body>
 </html>
