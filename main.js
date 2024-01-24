@@ -56,7 +56,7 @@ function loopCollision() {
     if (collision(tools[1], collidableEarth[j])) {
       dig.play();
       collidableEarth[j].remove();
-      collidableEarth[i].classList.add("collide-stone");
+      collidableStone[i].classList.add("collide-stone");
       break;
     }
   }
