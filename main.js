@@ -42,8 +42,9 @@ function randomizePositionFossilsAndRocks() {
 }
 
 function loopCollision() {
-  let collidableStone = document.getElementsByClassName("collide-stone");
-  let collidableEarth = document.getElementsByClassName("collide-earth");
+  try {
+    let collidableStone = document.getElementsByClassName("collide-stone");
+    let collidableEarth = document.getElementsByClassName("collide-earth");
 
   for (let i = 0; i < collidableStone.length; i++) { // pickaxe
     if (collision(tools[0], collidableStone[i])) {
@@ -62,6 +63,7 @@ function loopCollision() {
       break;
     }
   }
+
 
   for (let l = 0; l < fossils.length; l++) { // scanner
     if (collision(tools[2], fossils[l])) {        
@@ -82,9 +84,9 @@ function loopCollision() {
       sediment.setAttribute('value', fossilInfo.sediment);
       description.setAttribute('value', fossilInfo.description);
       break;
-    }
+      }
   setTimeout(loopCollision, 10);
-  }
+    }
 }
 
 function collision(obj1, obj2) {
