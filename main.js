@@ -115,7 +115,6 @@ function movePlayer() {
 }
 
 //scanner code
-let fossilOnScreen = {}
 
 AFRAME.registerComponent('fossil-type', {
   init: function () {
@@ -125,7 +124,7 @@ AFRAME.registerComponent('fossil-type', {
       const sediment = document.getElementById('fossil-sediment');
       const description = document.getElementById('fossil-description');
 
-      const modelPath = this.getAttribute('gltf-model');
+      const modelPath = this.el.getAttribute('gltf-model');
       const fossilMap = {
         'obj/fossil-original-state/fossil1.glb': { name: 'fossil 1', age: 'Jurassic', sediment: 'Sandstone', description: 'This is the first fossil.' },
         'obj/fossil-original-state/fossil2.glb': { name: 'fossil 2', age: 'Cretaceous', sediment: 'Limestone', description: 'This is the second fossil.' },
@@ -137,12 +136,10 @@ AFRAME.registerComponent('fossil-type', {
       mine.play();
     
       if (fossilInfo) {
-        // fossilOnScreen = fossilInfo;
         name.setAttribute('value', fossilInfo.name);
         age.setAttribute('value', fossilInfo.age);
         sediment.setAttribute('value', fossilInfo.sediment);
         description.setAttribute('value', fossilInfo.description);
-        // text1.setAttribute('value', "hejedcjjshsbv");
 
         console.log(`Name: ${fossilInfo.name}`);
         console.log(`Age: ${fossilInfo.age}`);
