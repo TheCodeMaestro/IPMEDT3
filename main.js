@@ -42,7 +42,6 @@ function randomizePositionFossilsAndRocks() {
 }
 
 function loopCollision() {
-  try {
     let collidableStone = document.getElementsByClassName("collide-stone");
     let collidableEarth = document.getElementsByClassName("collide-earth");
 
@@ -63,8 +62,6 @@ function loopCollision() {
       break;
     }
   }
-
-
   for (let l = 0; l < fossils.length; l++) { // scanner
     if (collision(tools[2], fossils[l])) {        
       const scan = document.getElementById("sound-scanner");
