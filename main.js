@@ -47,6 +47,7 @@ function loopCollision() {
 
   for (let i = 0; i < collidableStone.length; i++) { // pickaxe
     if (collision(tools[0], collidableStone[i])) {
+      const mine = document.getElementById("sound-mine");
       mine.play()
       collidableStone[i].remove();
       break;
@@ -54,17 +55,18 @@ function loopCollision() {
   }
   for (let j = 0; j < collidableEarth.length; j++) { // shovel
     if (collision(tools[1], collidableEarth[j])) {
+      const dig = document.getElementById("sound-dig");
       dig.play();
+      stoneLayer[j].classList.add("collide-stone");
       collidableEarth[j].remove();
-      collidableStone[i].classList.add("collide-stone");
       break;
     }
   }
 
   for (let l = 0; l < fossils.length; l++) { // scanner
     if (collision(tools[2], fossils[l])) {        
-      const dig = document.getElementById("sound-dig");
-      dig.play();
+      const scan = document.getElementById("sound-scanner");
+      scan.play();
       
       const modelPath = fossils[l].getAttribute('gltf-model');
       const fossilMap = {
@@ -80,9 +82,9 @@ function loopCollision() {
       sediment.setAttribute('value', fossilInfo.sediment);
       description.setAttribute('value', fossilInfo.description);
       break;
-  }
+    }
   setTimeout(loopCollision, 10);
-}
+  }
 }
 
 function collision(obj1, obj2) {
