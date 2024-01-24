@@ -42,25 +42,26 @@ function randomizePositionFossilsAndRocks() {
 }
 
 function loopCollision() {
-  for (let i = 0; i < stoneLayer.length; i++) { // pickaxe
-    if (collision(tools[0], stoneLayer[i])) {
-      const mine = document.getElementById("sound-mine");
+  let collidableStone = document.getElementsByClassName("collide-stone");
+  let collidableEarth = document.getElementsByClassName("collide-earth");
+
+  for (let i = 0; i < collidableStone.length; i++) { // pickaxe
+    if (collision(tools[0], collidableStone[i])) {
       mine.play()
-      stoneLayer[i].remove();
-      // fossils[j].setAttribute("gltf-model", "#fossil-broken-" + (j + 1));
+      collidableStone[i].remove();
       break;
     }
   }
-  for (let j = 0; j < earthLayer.length; j++) { // shovel
-    if (collision(tools[1], earthLayer[j])) {
-      const dig = document.getElementById("sound-dig");
+  for (let j = 0; j < collidableEarth.length; j++) { // shovel
+    if (collision(tools[1], collidableEarth[j])) {
       dig.play();
-      earthLayer[j].remove();
+      collidableEarth[j].remove();
+      collidableEarth[i].classList.add("collide-stone");
       break;
     }
   }
+
   for (let l = 0; l < fossils.length; l++) { // scanner
-  
     if (collision(tools[2], fossils[l])) {        
       const dig = document.getElementById("sound-dig");
       dig.play();
