@@ -42,24 +42,31 @@ function randomizePositionFossilsAndRocks() {
 }
 
 function loopCollision() {
-  let collidableStone = document.getElementsByClassName("collide-stone");
-  let collidableEarth = document.getElementsByClassName("collide-earth");
+  try {
+    let collidableStone = document.getElementsByClassName("collide-stone");
+    let collidableEarth = document.getElementsByClassName("collide-earth");
 
-  for (let i = 0; i < collidableStone.length; i++) { // pickaxe
-    if (collision(tools[0], collidableStone[i])) {
-      mine.play()
-      collidableStone[i].remove();
-      break;
+    for (let i = 0; i < collidableStone.length; i++) { // pickaxe
+      if (collision(tools[0], collidableStone[i])) {
+        mine.play();
+        collidableStone[i].remove();
+        break;
+      }
+    }
+  } catch {
+    let collidableEarth = document.getElementsByClassName("collide-earth");
+    let collidableStone = document.getElementsByClassName("fossil");
+    
+    for (let j = 0; j < collidableEarth.length; j++) { // shovel
+      if (collision(tools[1], collidableEarth[j])) {
+        dig.play();
+        collidableStone[j].classList.add("collide-stone");
+        collidableEarth[j].remove();
+        break;
+      }
     }
   }
-  for (let j = 0; j < collidableEarth.length; j++) { // shovel
-    if (collision(tools[1], collidableEarth[j])) {
-      dig.play();
-      collidableEarth[j].remove();
-      collidableStone[i].classList.add("collide-stone");
-      break;
-    }
-  }
+
 
   for (let l = 0; l < fossils.length; l++) { // scanner
     if (collision(tools[2], fossils[l])) {        
@@ -80,9 +87,9 @@ function loopCollision() {
       sediment.setAttribute('value', fossilInfo.sediment);
       description.setAttribute('value', fossilInfo.description);
       break;
-  }
+    }
   setTimeout(loopCollision, 10);
-}
+  }
 }
 
 function collision(obj1, obj2) {
