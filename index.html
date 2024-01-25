@@ -62,14 +62,10 @@
       <a-entity id="fossil-3" fossil-type class="fossil" static-body gltf-model="#fossil-original-3" scale="0.3 0.3 0.3"></a-entity>
       <a-entity id="fossil-4" fossil-type class="fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
 
-      <!-- <a-entity id="fossil-11" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-12" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-13" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity>
-      <a-entity id="fossil-14" fossil-type class="invis-fossil" static-body gltf-model="#fossil-original-4" scale="0.3 0.3 0.3"></a-entity> -->
-      
       <!-- tools -->
       <a-entity id="pickaxe-tool" class="tool interact" grabbable static-body gltf-model="#pickaxe" scale="0.1 0.1 0.1" rotation="0 90 0"></a-entity>
       <a-entity id="shovel-tool" class="tool interact" grabbable static-body gltf-model="#shovel" scale="0.04 0.04 0.04" rotation="0 0 0"></a-entity>
+      <a-entity grabbable id="scanner" class="tool interact" position="-0.5 0.5 -1" scale="0.05 0.05 0.05" gltf-model="obj/tools/scanner.glb" ></a-entity>
 
       <!-- basecamp -->
       <a-entity gltf-model="#tent" position="-11 1.4 -10" scale="0.10 0.10 0.10" rotation="0 320 0"></a-entity>
@@ -89,14 +85,18 @@
 
       <!-- tutorial-area -->
       <a-entity position="-12.15 0.4 -2.6" rotation="0 95 0" scale="2.3 2 2" gltf-model="#board"></a-entity>
-      <a-text value="Gebruik de schep om de aarde laag weg te scheppen. Gebruik de houweel om de steen laag weg te slaan."
-      color="black" position="-12 1.7 -1.4" rotation="0 95 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text value="Het doel van het spel is om vier fossielen op te graven en te scannen, zodat je weet wat je hebt opgegraven. \n
+      Gebruik de schep voor de aardelaag. Het houweel voor de steenlaag en als laatste, gebruik de scanner om de fossielen te scannen."
+      color="black" position="-12 1.5 -1.4" rotation="0 95 0" scale="0.55 0.8 0.5"></a-text>
+
       <!-- board scanner -->
-      <a-entity position="-5 0.2 -12" rotation="0 0 0" scale="2.3 2 2" gltf-model="#board"></a-entity>
-      <a-text id="fossil-name" value="test1" color="black" position="-5 1.8 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
-      <a-text id="fossil-age" value="test2" color="black" position="-5 1.6 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
-      <a-text id="fossil-sediment" value="test3" color="black" position="-5 1.4 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
-      <a-text id="fossil-description" value="test4" color="black" position="-5 1.2 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-entity position="-3.5 0.2 -11.95" rotation="0 0 0" scale="2.3 2 2" gltf-model="#board"></a-entity>
+      <a-text id="fossil-name" value="Naam:" color="black" position="-5 1.8 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text id="fossil-description" value="Omschrijving:" color="black" position="-5 1.55 -11.9" rotation="0 0 0" scale="0.6 0.4 0.6"></a-text>
+      <a-text id="fossil-height" value="Hoogte:" color="black" position="-5 1.2 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text id="fossil-weight" value="Gewicht:" color="black" position="-5 1 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      <a-text id="fossil-type" value="Type:" color="black" position="-5 0.8 -11.9" rotation="0 0 0" scale="0.5 0.5 0.5"></a-text>
+      
       
       <!-- digsite -->
       <a-entity class="stone" gltf-model="#stone-layer" scale="0.10 0.10 0.10"></a-entity>
@@ -127,13 +127,7 @@
       <a-entity class="pokemon" gltf-model="#pokemon-diglet" position="-12 0.09 5.6" rotation="0 20 0" scale="0.18 0.18 0.18"></a-entity>
       <a-entity class="pokemon" gltf-model="#pokemon-dugtrio" position="15 0.09 5" rotation="0 180 0" scale="0.18 0.18 0.18"></a-entity>
 
-      <!-- Scanner -->
-      <a-entity grabbable id="scanner" class="tool interact" position="-0.5 0.5 -1" scale="0.05 0.05 0.05" gltf-model="obj/tools/scanner.glb" ></a-entity>
-      <!-- <a-entity position="-1 1 -6" scale="0.5 0.5 0.5" fossil-type class="test-fossil" gltf-model="obj/fossil-original-state/fossil1.glb"></a-entity>
-      <a-entity position="-3 1 -6" scale="0.5 0.5 0.5" fossil-type class="test-fossil" gltf-model="obj/fossil-original-state/fossil2.glb"></a-entity>
-      <a-entity position="-5 1 -6" scale="0.5 0.5 0.5" fossil-type class="test-fossil" gltf-model="obj/fossil-original-state/fossil3.glb"></a-entity>
-      <a-entity position="-7 1 -6" scale="0.5 0.5 0.5" fossil-type class="test-fossil" gltf-model="obj/fossil-original-state/fossil4.glb"></a-entity> -->
-            
+      <!-- sound -->
       <audio id="sound-mine" src="sound/mine.mp3"></audio>
       <audio id="sound-brush" src="sound/brush.mp3"></audio>
       <audio id="sound-dig" src="sound/dig.mp3"></audio>

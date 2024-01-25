@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   invisFossils = document.getElementsByClassName("invis-fossil");
   earthLayer = document.getElementsByClassName("earth");
   stoneLayer = document.getElementsByClassName("stone");
-  // fossilTypes = document.getElementsByClassName("test-fossil");
   textName = document.getElementById("fossil-name");
-  age = document.getElementById('fossil-age');
-  sediment = document.getElementById('fossil-sediment');
   description = document.getElementById('fossil-description');
+  height = document.getElementById('fossil-height');
+  weight = document.getElementById('fossil-weight');
+  type = document.getElementById('fossil-type');
 
   movePlayer();
   randomizePositionFossilsAndRocks();
@@ -69,17 +69,24 @@ function loopCollision() {
       
       const modelPath = fossils[l].getAttribute('gltf-model');
       const fossilMap = {
-        'obj/fossil-original-state/fossil1.glb': { name: 'fossil 1', age: 'Jurassic', sediment: 'Sandstone', description: 'Thisthe first fossil.' },
-        'obj/fossil-original-state/fossil2.glb': { name: 'fossil 2', age: 'Cretaceous', sediment: 'Limestone', description: 'Thisthe second fossil.' },
-        'obj/fossil-original-state/fossil3.glb': { name: 'fossil 3', age: 'Paleogene', sediment: 'Shale', description: 'This is third fossil.' },
-        'obj/fossil-original-state/fossil4.glb': { name: 'fossil 4', age: 'Neogene', sediment: 'Mudstone', description: 'This is fourth fossil.' },
+        'obj/fossil-original-state/fossil1.glb': { name: 'Kabuto', description: 'Deze soort is bijna volledig uitgestorven. Kabuto vervelt elke drie dagen, waardoor hun schalen harder en harder worden.', height: '0.5 meter', weight: '11.5 kilogram', type: 'Steen en water' },
+        'obj/fossil-original-state/fossil2.glb': { name: 'Omanyte', description: 'Omdat sommige Omanyte weten te ontsnappen nadat ze zijn hersteld of worden vrijgelaten in het wild door mensen, wordt deze soort een probleem.', height: '0.4 meter', weight: '7.5 kilogram', type: 'Steen en water' },
+        'obj/fossil-original-state/fossil3.glb': { name: 'Aerodactyl', description: 'Dit is een angstaanjagende Pokémon uit lang vervlogen tijden. Schijnbaar is moderne technologie niet in staat om een volledig perfect gereconstrueerd exemplaar te creëren.', height: '1.8 meter', weight: '59 kilogram', type: 'Steen en vliegen' },
+        'obj/fossil-original-state/fossil4.glb': { name: 'Tirtouga', description: 'Deze Pokémon bewoonde oeroude zeeën. Ondanks dat het alleen kan kruipen, waagt het zich toch op het land op zoek naar prooi.', height: '0.7 meter', weight: '16.5 kilogram', type: 'Steen en water' },
       };
+
+      // textName = document.getElementById("fossil-name");
+      // description = document.getElementById('fossil-description');
+      // height = document.getElementById('fossil-height');
+      // weight = document.getElementById('fossil-weight');
+      // type = document.getElementById('fossil-type');
             
       const fossilInfo = fossilMap[modelPath];
       textName.setAttribute('value', fossilInfo.name);
-      age.setAttribute('value', fossilInfo.age);
-      sediment.setAttribute('value', fossilInfo.sediment);
       description.setAttribute('value', fossilInfo.description);
+      height.setAttribute('value', fossilInfo.height);
+      weight.setAttribute('value', fossilInfo.weight);
+      type.setAttribute('value', fossilInfo.type);
       break;
       }
   setTimeout(loopCollision, 10);
