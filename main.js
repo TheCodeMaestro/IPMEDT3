@@ -25,7 +25,7 @@ function setPosTools() {
   for (let i = 0; i < tools.length; i++) {
     tools[0].object3D.position.set("-12", "0.8", "2");
     tools[1].object3D.position.set("-12", "0.5", "1");
-    tools[2].object3D.position.set("-5", "1", "5");
+    tools[2].object3D.position.set("-12", "1", "0");
   }
 }
 
@@ -35,7 +35,6 @@ function randomizePositionFossilsAndRocks() {
     posY = getRandomInt(-9, 10);
 
     fossils[i].object3D.position.set(posX, "0", posY);
-    // invisFossils[i].object3D.position.set(posX, "-5", posY);
     earthLayer[i].object3D.position.set(posX, "-0.05", posY);
     stoneLayer[i].object3D.position.set(posX, "-0.05", posY);
   }
@@ -74,12 +73,6 @@ function loopCollision() {
         'obj/fossil-original-state/fossil3.glb': { name: 'Aerodactyl', description: 'Dit is een angstaanjagende Pokémon uit lang vervlogen tijden. Schijnbaar is moderne technologie niet in staat om een volledig perfect gereconstrueerd exemplaar te creëren.', height: '1.8 meter', weight: '59 kilogram', type: 'Steen en vliegen' },
         'obj/fossil-original-state/fossil4.glb': { name: 'Tirtouga', description: 'Deze Pokémon bewoonde oeroude zeeën. Ondanks dat het alleen kan kruipen, waagt het zich toch op het land op zoek naar prooi.', height: '0.7 meter', weight: '16.5 kilogram', type: 'Steen en water' },
       };
-
-      // textName = document.getElementById("fossil-name");
-      // description = document.getElementById('fossil-description');
-      // height = document.getElementById('fossil-height');
-      // weight = document.getElementById('fossil-weight');
-      // type = document.getElementById('fossil-type');
             
       const fossilInfo = fossilMap[modelPath];
       textName.setAttribute('value', fossilInfo.name);
